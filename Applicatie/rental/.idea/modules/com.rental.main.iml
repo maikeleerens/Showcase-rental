@@ -47,5 +47,6 @@
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.28" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.12.1" level="project" />
     <orderEntry type="module" module-name="rental.domain" />
+    <orderEntry type="library" name="commons-lang3-3.9" level="application" />
   </component>
 </module>

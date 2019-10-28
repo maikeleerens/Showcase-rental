@@ -7,7 +7,7 @@ public class BaseEntity {
     private String id;
 
     public BaseEntity() {
-        this.id = RandomStringGenerator.GenerateRandomAlphanumericString(10);
+        this.id = RandomStringGenerator.GenerateRandomAlphanumericString(15);
     }
 
     public String getId() {
