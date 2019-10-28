@@ -5,12 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class BookingController {
 
     //Gets all bookings
     //returns code 200: All bookings successfully fetched
     //returns code 400: Something went wrong
-    @GetMapping("/bookings")
+    @GetMapping("/api/bookings")
     public ResponseEntity GetAllBookings()
     {
         try
@@ -26,7 +27,7 @@ public class BookingController {
     //Get a booking by id
     //returns code 200: Booking successfully fetched
     //returns code 400: Id is empty
-    @GetMapping("/bookings/{id}")
+    @GetMapping("/api/bookings/{id}")
     public ResponseEntity GetBookingById(@PathVariable String id)
     {
         try
@@ -44,13 +45,16 @@ public class BookingController {
     //Create a new booking
     //returns code 200: New booking successfully created
     //returns code 400: Booking is empty
-    @PostMapping("/booking/create")
+    @PostMapping("/api/booking/create")
     public ResponseEntity CreateBooking(@RequestBody Booking booking)
     {
         try
         {
             if (booking.IsNullOrEmpty())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking is empty");
+
+            //Attach user to booking
+            booking.Attach(booking.getUser());
             return ResponseEntity.status(HttpStatus.OK).body(booking);
         }
         catch (Exception ex)
@@ -62,7 +66,7 @@ public class BookingController {
     //Update an existing booking
     //returns code 200: Booking successfully updated
     //returns code 400: Booking or id is empty
-    @PutMapping("/bookings/edit/{id}")
+    @PutMapping("/api/bookings/edit/{id}")
     public ResponseEntity EditBooking(@PathVariable String id, @RequestBody Booking booking)
     {
         try

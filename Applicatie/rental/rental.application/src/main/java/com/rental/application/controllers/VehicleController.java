@@ -5,12 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class VehicleController {
 
     //Gets all vehicles
     //returns code 200: All vehicles successfully fetched
     //returns code 400: Something went wrong
-    @GetMapping("/vehicles")
+    @GetMapping("/api/vehicles")
     public ResponseEntity GetAllVehicles()
     {
         try
@@ -26,7 +27,7 @@ public class VehicleController {
     //Get a vehicle by id
     //returns code 200: Vehicle successfully fetched
     //returns code 400" Id is empty
-    @GetMapping("/vehicles/{id}")
+    @GetMapping("/api/vehicles/{id}")
     public ResponseEntity GetVehicleById(@PathVariable String id)
     {
         try
@@ -44,7 +45,7 @@ public class VehicleController {
     //Create a new vehicle
     //returns code 200: New vehicle successfully created
     //returns code 400: Vehicle is empty
-    @PostMapping("/vehicles/create")
+    @PostMapping("/api/vehicles/create")
     public ResponseEntity CreateVehicle(@RequestBody Vehicle vehicle)
     {
         try
@@ -62,7 +63,7 @@ public class VehicleController {
     //Update an existing vehicle
     //returns code 200: Vehicle successfully updated
     //returns code 400: Vehicle or id is empty
-    @PutMapping("/vehicles/edit/{id}")
+    @PutMapping("/api/vehicles/edit/{id}")
     public ResponseEntity EditVehicle(@PathVariable String id, @RequestBody Vehicle vehicle)
     {
         try

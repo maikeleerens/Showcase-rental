@@ -11,7 +11,7 @@ public class UserController {
     //Gets all users from database
     //returns code 200: All users where successfully fetched
     //returns code 400: Something went wrong
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public ResponseEntity GetAllUsers()
     {
         try
@@ -27,7 +27,7 @@ public class UserController {
     //Get a specific user by id
     //returns code 200: User successfully fetched
     //returns code 400: Id is empty
-    @GetMapping("users/{id}")
+    @GetMapping("/api/users/{id}")
     public ResponseEntity GetUserById(@PathVariable("id") String id)
     {
         try
@@ -45,7 +45,7 @@ public class UserController {
     //Creates a new user
     //returns code 200: User successfully created
     //returns code 400: User is empty
-    @PostMapping("/users/create")
+    @PostMapping("/api/users/create")
     public ResponseEntity CreateUser(@RequestBody User user)
     {
         try
@@ -63,7 +63,7 @@ public class UserController {
     //Updates an existing user
     //returns code 200: User is successfully updated
     //returns code 400: User or id is empty
-    @PutMapping("/users/edit/{id}")
+    @PutMapping("/api/users/edit/{id}")
     public ResponseEntity EditUser(@PathVariable("id") String id, @RequestBody User user)
     {
         try
