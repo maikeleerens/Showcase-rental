@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
+    //Gets all users from database
+    //returns code 200: All users where successfully fetched
+    //returns code 400: Something went wrong
     @GetMapping("/users")
     public ResponseEntity GetAllUsers()
     {
@@ -21,11 +24,16 @@ public class UserController {
         }
     }
 
+    //Get a specific user by id
+    //returns code 200: User successfully fetched
+    //returns code 400: Id is empty
     @GetMapping("users/{id}")
     public ResponseEntity GetUserById(@PathVariable("id") String id)
     {
         try
         {
+            if ((id == null) || (id.trim().isEmpty()))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
             return ResponseEntity.status(HttpStatus.OK).body(id);
         }
         catch (Exception ex)
@@ -34,6 +42,9 @@ public class UserController {
         }
     }
 
+    //Creates a new user
+    //returns code 200: User successfully created
+    //returns code 400: User is empty
     @PostMapping("/users/create")
     public ResponseEntity CreateUser(@RequestBody User user)
     {
@@ -41,7 +52,6 @@ public class UserController {
         {
             if (user.IsNullOrEmpty())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is empty");
-
             return ResponseEntity.status(HttpStatus.OK).body(user);
         }
         catch (Exception ex)
@@ -50,8 +60,11 @@ public class UserController {
         }
     }
 
+    //Updates an existing user
+    //returns code 200: User is successfully updated
+    //returns code 400: User or id is empty
     @PutMapping("/users/edit/{id}")
-    public ResponseEntity EditUser(@PathVariable("id") String id, User user)
+    public ResponseEntity EditUser(@PathVariable("id") String id, @RequestBody User user)
     {
         try
         {
@@ -63,7 +76,5 @@ public class UserController {
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
-
-
     }
 }

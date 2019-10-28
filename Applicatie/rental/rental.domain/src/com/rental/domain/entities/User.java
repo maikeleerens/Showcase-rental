@@ -43,13 +43,6 @@ public class User extends BaseEntity implements Observer {
         this.city = city;
     }
 
-    public boolean IsNullOrEmpty()
-    {
-        return (this.address == null || this.address.trim().isEmpty())
-                || (this.name == null || this.name.trim().isEmpty())
-                || (this.city == null || this.city.trim().isEmpty());
-    }
-
     @Override
     public String getId() {
         return super.getId();
@@ -58,5 +51,12 @@ public class User extends BaseEntity implements Observer {
     @Override
     public void Update() {
         System.out.println("HuurderObservertTest");
+    }
+
+    public boolean IsNullOrEmpty()
+    {
+        return ((this.address == null) || this.address.trim().isEmpty())
+                || ((this.name == null) || this.name.trim().isEmpty())
+                || ((this.city == null) || this.city.trim().isEmpty());
     }
 }

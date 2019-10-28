@@ -57,4 +57,11 @@ public class Vehicle extends BaseEntity {
     public String getId() {
         return super.getId();
     }
+
+    public boolean IsNullOrEmpty()
+    {
+        return ((this.licencePlate == null) || this.licencePlate.trim().isEmpty())
+                || ((this.vehicleName == null) || this.vehicleName.trim().isEmpty())
+                || ((this.mileage < 1) || this.pricePerKm.compareTo(BigDecimal.valueOf(1)) < 0);
+    }
 }

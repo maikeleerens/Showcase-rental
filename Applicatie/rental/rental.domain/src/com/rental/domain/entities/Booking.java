@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Booking extends BaseEntity implements Subject {
 
+    private String bookingNumber;
     private Date startDate;
     private Date endDate;
     private List<Vehicle> vehicles = new ArrayList<>();
@@ -19,7 +20,8 @@ public class Booking extends BaseEntity implements Subject {
     public Booking() {
     }
 
-    public Booking(Date startDate, Date endDate, List<Vehicle> vehicles, User user) {
+    public Booking(String bookingNumber, Date startDate, Date endDate, List<Vehicle> vehicles, User user) {
+        this.bookingNumber = bookingNumber;
         this.startDate = startDate;
         this.endDate = endDate;
         this.vehicles = vehicles;
@@ -58,6 +60,14 @@ public class Booking extends BaseEntity implements Subject {
         this.user = user;
     }
 
+    public String getBookingNumber() {
+        return bookingNumber;
+    }
+
+    public void setBookingNumber(String bookingNumber) {
+        this.bookingNumber = bookingNumber;
+    }
+
     @Override
     public String getId() {
         return super.getId();
@@ -78,5 +88,11 @@ public class Booking extends BaseEntity implements Subject {
         for (var observer : observers) {
             observer.Update();
         }
+    }
+
+    public boolean IsNullOrEmpty() {
+        return ((this.startDate == null) || (this.endDate == null))
+                || ((this.user == null) || (this.vehicles == null))
+                || ((this.vehicles.size() < 1));
     }
 }

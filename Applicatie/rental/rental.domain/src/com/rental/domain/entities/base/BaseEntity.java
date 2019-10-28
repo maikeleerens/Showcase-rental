@@ -2,7 +2,7 @@ package com.rental.domain.entities.base;
 
 import com.rental.domain.helpers.RandomStringGenerator;
 
-//Base enitity used to give all objects an ID
+//Base entity used to give all objects an ID
 public class BaseEntity {
     private String id;
 
