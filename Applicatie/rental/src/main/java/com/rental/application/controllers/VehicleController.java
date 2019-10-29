@@ -1,6 +1,8 @@
 package com.rental.application.controllers;
 
 import com.rental.domain.entities.Vehicle;
+import com.rental.domain.services.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class VehicleController {
 
+    @Autowired
+    VehicleService service;
+
     //Gets all vehicles
     //returns code 200: All vehicles successfully fetched
     //returns code 400: Something went wrong
     @GetMapping("/api/vehicles")
     public ResponseEntity GetAllVehicles() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body("GetAllVehicles");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getAllVehicles());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -42,6 +47,7 @@ public class VehicleController {
         try {
             if (vehicle.IsNullOrEmpty())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is empty");
+            service.CreateVehicle(vehicle);
             return ResponseEntity.status(HttpStatus.OK).body(vehicle);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

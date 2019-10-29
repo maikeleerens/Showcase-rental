@@ -1,13 +1,25 @@
 package com.rental.domain.entities;
 
+import com.rental.domain.entities.base.BaseEntity;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
-public class Vehicle {
+@Entity
+@Table(name = "Vehicles")
+public class Vehicle extends BaseEntity {
 
-    private String id;
+    @Column(name = "LicentePlate", unique = true, nullable = false)
     private String licencePlate;
+
+    @Column(name = "VehicleName", nullable = false)
     private String vehicleName;
+
+    @Column(name = "PricePerDay", nullable = false)
     private BigDecimal pricePerDay;
+
+    @Column(name = "Milage", nullable = false)
     private int mileage;
 
     public Vehicle() {
@@ -18,10 +30,6 @@ public class Vehicle {
         this.vehicleName = vehicleName;
         this.pricePerDay = pricePerDay;
         this.mileage = mileage;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getLicencePlate() {
@@ -56,10 +64,19 @@ public class Vehicle {
         this.mileage = mileage;
     }
 
-    public boolean IsNullOrEmpty()
-    {
+    @Override
+    public UUID getId() {
+        return super.getId();
+    }
+
+    public boolean IsNullOrEmpty() {
         return ((this.licencePlate == null) || this.licencePlate.trim().isEmpty())
                 || ((this.vehicleName == null) || this.vehicleName.trim().isEmpty())
                 || ((this.mileage < 1) || this.pricePerDay.compareTo(BigDecimal.valueOf(1)) < 0);
+    }
+
+    @Override
+    public String toString() {
+        return "Kenteken: " + getLicencePlate() + " Voertuig: " + getVehicleName();
     }
 }
