@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/vehicles")
 public class VehicleController {
 
     @Autowired
@@ -16,7 +17,7 @@ public class VehicleController {
     //Gets all vehicles
     //returns code 200: All vehicles successfully fetched
     //returns code 400: Something went wrong
-    @GetMapping("/api/vehicles")
+    @GetMapping
     public ResponseEntity GetAllVehicles() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.getAllVehicles());
@@ -28,7 +29,7 @@ public class VehicleController {
     //Get a vehicle by id
     //returns code 200: Vehicle successfully fetched
     //returns code 400" Id is empty
-    @GetMapping("/api/vehicles/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity GetVehicleById(@PathVariable String id) {
         try {
             if ((id == null) || (id.trim().isEmpty()))
@@ -42,7 +43,7 @@ public class VehicleController {
     //Create a new vehicle
     //returns code 200: New vehicle successfully created
     //returns code 400: Vehicle is empty
-    @PostMapping("/api/vehicles/create")
+    @PostMapping("/create")
     public ResponseEntity CreateVehicle(@RequestBody Vehicle vehicle) {
         try {
             if (vehicle.IsNullOrEmpty())
@@ -57,7 +58,7 @@ public class VehicleController {
     //Update an existing vehicle
     //returns code 200: Vehicle successfully updated
     //returns code 400: Vehicle or id is empty
-    @PutMapping("/api/vehicles/edit/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity EditVehicle(@PathVariable String id, @RequestBody Vehicle vehicle) {
         try {
             if ((id == null) || (id.trim().isEmpty()) || (vehicle.IsNullOrEmpty()))

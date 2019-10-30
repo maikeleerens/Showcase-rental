@@ -3,6 +3,7 @@ package com.rental.domain.services;
 import com.rental.domain.entities.Vehicle;
 import com.rental.infrastructure.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -10,16 +10,16 @@ import java.util.UUID;
 @Table(name = "Vehicles")
 public class Vehicle extends BaseEntity {
 
-    @Column(name = "LicentePlate", unique = true, nullable = false)
+    @Column(name = "licence_plate", unique = true, nullable = false)
     private String licencePlate;
 
-    @Column(name = "VehicleName", nullable = false)
+    @Column(name = "vehicle_name", nullable = false)
     private String vehicleName;
 
-    @Column(name = "PricePerDay", nullable = false)
+    @Column(name = "price_per_day", nullable = false)
     private BigDecimal pricePerDay;
 
-    @Column(name = "Milage", nullable = false)
+    @Column(name = "mileage", nullable = false)
     private int mileage;
 
     public Vehicle() {
