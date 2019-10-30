@@ -1,25 +1,31 @@
 package com.rental.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.rental.domain.entities.base.BaseEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Vehicles")
 public class Vehicle extends BaseEntity {
 
     @Column(name = "licence_plate", unique = true, nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String licencePlate;
 
     @Column(name = "vehicle_name", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String vehicleName;
 
     @Column(name = "price_per_day", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private BigDecimal pricePerDay;
 
     @Column(name = "mileage", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private int mileage;
 
     public Vehicle() {
@@ -30,6 +36,10 @@ public class Vehicle extends BaseEntity {
         this.vehicleName = vehicleName;
         this.pricePerDay = pricePerDay;
         this.mileage = mileage;
+    }
+
+    public Vehicle(String errorMessage) {
+        super.setError(errorMessage);
     }
 
     public String getLicencePlate() {
@@ -64,15 +74,14 @@ public class Vehicle extends BaseEntity {
         this.mileage = mileage;
     }
 
-    @Override
-    public UUID getId() {
-        return super.getId();
-    }
-
-    public boolean IsNullOrEmpty() {
-        return ((this.licencePlate == null) || this.licencePlate.trim().isEmpty())
-                || ((this.vehicleName == null) || this.vehicleName.trim().isEmpty())
-                || ((this.mileage < 1) || this.pricePerDay.compareTo(BigDecimal.valueOf(1)) < 0);
+    @JsonIgnore
+    public boolean isValid() {
+        if (!getError()
+                && (getLicencePlate() != null && !getLicencePlate().isEmpty())
+                && (getVehicleName() != null && !getVehicleName().isEmpty())) {
+            return true;
+        }
+        return false;
     }
 
     @Override

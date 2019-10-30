@@ -4,13 +4,13 @@ Drop table if Exists Bookings;
 Drop table if Exists BookingsVehicles;
 
 CREATE table Users (
-Id UUID primary key,
-Name varchar NOT NULL,
-Address varchar not null,
-City varchar not null
+id UUID primary key,
+name varchar NOT NULL,
+address varchar not null,
+city varchar not null
 );
 
-create table Vehicles (
+CREATE table Vehicles (
 id UUID primary key,
 licence_plate varchar not null,
 vehicle_name varchar not null,
@@ -19,20 +19,20 @@ mileage int not null
 );
 
 create table Bookings (
-Id UUID primary key,
-BookingNumber varchar not null,
-StartDate Date not null,
-EndDate Date not null,
-UserId varchar not null,
-IsReturned bit not null,
-TotalPrice decimal(10,2) not null,
-FOREIGN KEY(UserId) references Users(Id)
+id UUID primary key,
+booking_number varchar not null,
+start_date Date not null,
+end_date Date not null,
+user_id UUID not null,
+is_returned bit not null,
+total_price decimal(10,2) not null,
+FOREIGN KEY(user_id) references Users(id)
 );
 
-create table BookingsVehicles (
-Id UUID primary key,
-BookingsId varchar not null,
-VehicleId varchar not null,
-FOREIGN KEY(BookingsId) references Bookings(Id),
-FOREIGN KEY(VehicleId) references Vehicles(Id)
+CREATE table BookingsVehicles (
+id UUID primary key,
+bookings_id UUID not null,
+vehicle_id UUID not null,
+FOREIGN KEY(bookings_id) references Bookings(id),
+FOREIGN KEY(vehicle_id) references Vehicles(id)
 );

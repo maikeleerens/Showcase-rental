@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Documented;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/vehicles")
 public class VehicleController {
@@ -14,56 +17,67 @@ public class VehicleController {
     @Autowired
     VehicleService service;
 
-    //Gets all vehicles
-    //returns code 200: All vehicles successfully fetched
-    //returns code 400: Something went wrong
     @GetMapping
     public ResponseEntity GetAllVehicles() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.getAllVehicles());
+            var vehicleList = service.getAllVehicles();
+            return vehicleList.isEmpty() ? ResponseEntity.status(HttpStatus.OK).body("No vehicles found") : ResponseEntity.status(HttpStatus.OK).body(vehicleList);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
-    //Get a vehicle by id
-    //returns code 200: Vehicle successfully fetched
-    //returns code 400" Id is empty
-    @GetMapping("/{id}")
-    public ResponseEntity GetVehicleById(@PathVariable String id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity GetVehicleById(@PathVariable UUID id) {
         try {
-            if ((id == null) || (id.trim().isEmpty()))
+            if (id == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            return ResponseEntity.status(HttpStatus.OK).body("GetVehicleById");
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-        }
-    }
 
-    //Create a new vehicle
-    //returns code 200: New vehicle successfully created
-    //returns code 400: Vehicle is empty
-    @PostMapping("/create")
-    public ResponseEntity CreateVehicle(@RequestBody Vehicle vehicle) {
-        try {
-            if (vehicle.IsNullOrEmpty())
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is empty");
-            service.CreateVehicle(vehicle);
+            var vehicle = service.getVehicleById(id);
+            if (vehicle.getError())
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(vehicle.getErrorMessage());
+
             return ResponseEntity.status(HttpStatus.OK).body(vehicle);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
-    //Update an existing vehicle
-    //returns code 200: Vehicle successfully updated
-    //returns code 400: Vehicle or id is empty
-    @PutMapping("/edit/{id}")
-    public ResponseEntity EditVehicle(@PathVariable String id, @RequestBody Vehicle vehicle) {
+    @GetMapping("plate/{licenceplate}")
+    public ResponseEntity GetVehicleByLicencePlate(@PathVariable String licenceplate) {
         try {
-            if ((id == null) || (id.trim().isEmpty()) || (vehicle.IsNullOrEmpty()))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id or vehicle is empty");
-            return ResponseEntity.status(HttpStatus.OK).body("Vehicle with id " + id + " is successfully updated");
+            if (licenceplate == null)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+
+            var vehicle = service.getByLicencePlate(licenceplate);
+            if (vehicle.getError())
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(vehicle.getErrorMessage());
+
+            return ResponseEntity.status(HttpStatus.OK).body(vehicle);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity CreateVehicle(@RequestBody Vehicle vehicle) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.CreateVehicle(vehicle));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity EditVehicle(@PathVariable UUID id, @RequestBody Vehicle vehicle) {
+        try {
+            if ((id == null))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+
+            var updatedVehicle = service.UpdateVehicle(id, vehicle);
+            if (updatedVehicle.getError())
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(updatedVehicle.getErrorMessage());
+            return ResponseEntity.status(HttpStatus.OK).body("Vehicle with licence plate " + vehicle.getLicencePlate() + " is successfully updated");
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
