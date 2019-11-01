@@ -1,26 +1,29 @@
 package com.rental.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
 
-import javax.naming.Name;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.NamedAttributeNode;
 import javax.persistence.Table;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Users")
 public class User extends BaseEntity implements Observer {
 
     @Column(name = "name", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String name;
 
     @Column(name = "address", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String address;
 
     @Column(name = "city", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String city;
 
     public User() {
@@ -30,6 +33,10 @@ public class User extends BaseEntity implements Observer {
         this.name = name;
         this.address = address;
         this.city = city;
+    }
+
+    public User(String errorMessage) {
+        super.setError(errorMessage);
     }
 
     public String getName() {
@@ -56,9 +63,15 @@ public class User extends BaseEntity implements Observer {
         this.city = city;
     }
 
-    @Override
-    public UUID getId() {
-        return super.getId();
+    @JsonIgnore
+    public boolean isValid() {
+        if (!getError()
+                && (getName() != null && !getName().isEmpty())
+                && (getAddress() != null && !getAddress().isEmpty())
+                && (getCity() != null && !getCity().isEmpty())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -66,9 +79,8 @@ public class User extends BaseEntity implements Observer {
         System.out.println("HuurderObservertTest");
     }
 
-    public boolean IsNullOrEmpty() {
-        return ((this.address == null) || this.address.trim().isEmpty())
-                || ((this.name == null) || this.name.trim().isEmpty())
-                || ((this.city == null) || this.city.trim().isEmpty());
+    @Override
+    public String toString() {
+        return "Naam: " + getName() + " adres: " + getAddress() + " stad: " + getCity();
     }
 }

@@ -1,34 +1,45 @@
 package com.rental.application.controllers;
 
 import com.rental.domain.entities.Booking;
+import com.rental.domain.services.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
+@RequestMapping("/api/bookings")
 public class BookingController {
 
-    //Gets all bookings
-    //returns code 200: All bookings successfully fetched
-    //returns code 400: Something went wrong
-    @GetMapping("/api/bookings")
+    @Autowired
+    BookingService service;
+
+    @GetMapping
     public ResponseEntity GetAllBookings() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body("GetAllBookings");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getAllBookings());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
-    //Get a booking by id
-    //returns code 200: Booking successfully fetched
-    //returns code 400: Id is empty
-    @GetMapping("/api/bookings/{id}")
-    public ResponseEntity GetBookingById(@PathVariable String id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity GetBookingById(@PathVariable UUID id) {
         try {
-            if ((id == null) || (id.trim().isEmpty()))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            return ResponseEntity.status(HttpStatus.OK).body("GetBookingById");
+            if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getBookingById(id));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/number/{number}")
+    public ResponseEntity getBookingByNumber(@PathVariable String number) {
+        try {
+            if (number == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Number is empty");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getBookingByBookingNumber(number));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -38,32 +49,20 @@ public class BookingController {
      * @param booking
      * @return
      */
-    //Create a new booking
-    //returns code 200: New booking successfully created
-    //returns code 400: Booking is empty
-    @PostMapping("/api/booking/create")
+    @PostMapping("/create")
     public ResponseEntity CreateBooking(@RequestBody Booking booking) {
         try {
-            if (booking.IsNullOrEmpty())
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking is empty");
-
-            //Attach user to booking
-            booking.Attach(booking.getUser());
-            return ResponseEntity.status(HttpStatus.OK).body(booking);
+            return ResponseEntity.status(HttpStatus.OK).body(service.createBooking(booking));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
-    //Update an existing booking
-    //returns code 200: Booking successfully updated
-    //returns code 400: Booking or id is empty
-    @PutMapping("/api/bookings/edit/{id}")
-    public ResponseEntity EditBooking(@PathVariable String id, @RequestBody Booking booking) {
+    @PutMapping("/edit/{id}")
+    public ResponseEntity EditBooking(@PathVariable UUID id, @RequestBody Booking booking) {
         try {
-            if ((id == null) || (id.trim().isEmpty()) || (booking.IsNullOrEmpty()))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id or booking is empty");
-            return ResponseEntity.status(HttpStatus.OK).body("Booking with id " + id + " has been updated");
+            if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+            return ResponseEntity.status(HttpStatus.OK).body(service.updateBooking(id, booking));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

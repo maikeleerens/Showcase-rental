@@ -5,6 +5,7 @@ import com.rental.infrastructure.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,19 +15,23 @@ public class VehicleService {
     @Autowired
     VehicleRepository repository;
 
-    public List<Vehicle> getAllVehicles() {
+    public List<Vehicle> getAllVehicles() throws Exception {
+        var vehicleList = repository.findAll();
+        if (vehicleList.size() < 1) {
+            return Arrays.asList(new Vehicle("No vehicles found"));
+        }
         return repository.findAll();
     }
 
-    public Vehicle getVehicleById(UUID id) throws NullPointerException {
+    public Vehicle getVehicleById(UUID id) throws Exception {
         return repository.findById(id).orElse(new Vehicle("No vehicle found with id: " + id));
     }
 
-    public Vehicle getByLicencePlate(String licencePlate) throws NullPointerException {
+    public Vehicle getByLicencePlate(String licencePlate) throws Exception {
         return repository.findByLicencePlate(licencePlate).orElse(new Vehicle("No vehicle found with licence plate: " + licencePlate));
     }
 
-    public Vehicle CreateVehicle(Vehicle vehicle) throws NullPointerException {
+    public Vehicle createVehicle(Vehicle vehicle) throws Exception {
         if (vehicle.isValid()) {
             repository.save(vehicle);
             return vehicle;
@@ -35,12 +40,12 @@ public class VehicleService {
         }
     }
 
-    public Vehicle UpdateVehicle(UUID id, Vehicle vehicle) {
+    public Vehicle updateVehicle(UUID id, Vehicle vehicle) throws Exception {
         var vehicleToUpdate = getVehicleById(id);
-        if (vehicleToUpdate.getError() || !vehicleToUpdate.isValid())
-            return vehicleToUpdate;
+        if (!vehicleToUpdate.isValid())
+            return new Vehicle("Vehicle to update is not valid");
 
-        if (!vehicle.getError() && vehicle.isValid()) {
+        if (vehicle.isValid()) {
             vehicle.setId(id);
             repository.save(vehicle);
             return vehicle;

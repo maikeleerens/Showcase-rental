@@ -1,23 +1,53 @@
 package com.rental.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
 import com.rental.domain.interfaces.Subject;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Booking implements Subject {
+@Entity
+@Table(name = "Bookings")
+public class Booking extends BaseEntity implements Subject {
 
-    private String id;
+    @Column(name = "booking_number", unique = true, nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private String bookingNumber;
+
+    @Column(name = "start_date", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private Date startDate;
+
+    @Column(name = "end_date", nullable = false)
+    @JsonInclude(Include.NON_DEFAULT)
     private Date endDate;
+
+    @JoinTable(name = "BookingsVehicles", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+    @ElementCollection(targetClass = Vehicle.class)
+    @JsonInclude(Include.NON_DEFAULT)
     private List<Vehicle> vehicles = new ArrayList<>();
+
+    //@JoinTable(name = "Users", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToOne(targetEntity = User.class)
+    @JsonInclude(Include.NON_DEFAULT)
     private User user;
+
+    @Column(name = "is_returned")
     private boolean isReturned = false;
+
+    @Column(name = "total_price")
+    @JsonInclude(Include.NON_DEFAULT)
     private BigDecimal totalPrice;
+
+    @Transient
+    @JsonIgnore
     private List<Observer> observers = new ArrayList<>();
 
     public Booking() {
@@ -30,8 +60,8 @@ public class Booking implements Subject {
         this.user = user;
     }
 
-    public String getId() {
-        return id;
+    public Booking(String errorMessage) {
+        super.setError(errorMessage);
     }
 
     public Date getStartDate() {
@@ -74,6 +104,17 @@ public class Booking implements Subject {
         this.bookingNumber = bookingNumber;
     }
 
+    @JsonIgnore
+    public boolean isValid() {
+        if (!getError()
+                && (getBookingNumber() != null && !getBookingNumber().isEmpty())
+                && (getStartDate() != null && getEndDate() != null)
+                && (getUser() != null && !getVehicles().isEmpty())) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void Attach(Observer observer) {
         observers.add(observer);
@@ -89,11 +130,5 @@ public class Booking implements Subject {
         for (var observer : observers) {
             observer.Update();
         }
-    }
-
-    public boolean IsNullOrEmpty() {
-        return ((this.startDate == null) || (this.endDate == null))
-                || ((this.user == null) || (this.vehicles == null))
-                || ((this.vehicles.size() < 1));
     }
 }
