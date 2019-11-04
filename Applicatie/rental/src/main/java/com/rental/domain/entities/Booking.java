@@ -1,5 +1,6 @@
 package com.rental.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -23,21 +24,24 @@ public class Booking extends BaseEntity implements Subject {
 
     @Column(name = "start_date", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date endDate;
 
-    @JoinTable(name = "BookingsVehicles", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
     @ElementCollection(targetClass = Vehicle.class)
+    @CollectionTable(name = "Bookings_vehicles")
     @JsonInclude(Include.NON_DEFAULT)
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    //@JoinTable(name = "Users", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @ManyToOne(targetEntity = User.class)
     @JsonInclude(Include.NON_DEFAULT)
     private User user;
+
+
 
     @Column(name = "is_returned")
     private boolean isReturned = false;
