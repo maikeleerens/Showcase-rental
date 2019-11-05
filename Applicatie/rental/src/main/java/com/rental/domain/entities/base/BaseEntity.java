@@ -2,6 +2,7 @@ package com.rental.domain.entities.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -9,8 +10,10 @@ import java.util.UUID;
 @MappedSuperclass
 public class BaseEntity {
 
+    //region Private attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", unique = true, nullable = false)
     @JsonInclude(Include.NON_NULL)
     private UUID id;
@@ -22,8 +25,9 @@ public class BaseEntity {
     @Transient
     @JsonInclude(Include.NON_NULL)
     private String errorMessage;
+    //endregion
 
-
+    //region Getters and setters
     public UUID getId() {
         return id;
     }
@@ -44,9 +48,12 @@ public class BaseEntity {
     public String getErrorMessage() {
         return errorMessage;
     }
+    //endregion
 
+    //region Public methods
     public void clearError() {
         error = false;
         errorMessage = null;
     }
+    //endregion
 }

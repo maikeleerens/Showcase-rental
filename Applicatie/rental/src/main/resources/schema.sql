@@ -2,6 +2,7 @@ Drop table if Exists Companies;
 Drop table if Exists Users;
 Drop table if Exists Vehicles;
 Drop table if Exists Bookings;
+Drop table if Exists Bookings_Vehicles;
 
 CREATE table Companies (
 id UUID primary key,

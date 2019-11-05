@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "Users")
 public class User extends BaseEntity implements Observer {
 
+    //region Private attributes
     @Column(name = "name", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private String name;
@@ -25,7 +26,9 @@ public class User extends BaseEntity implements Observer {
     @Column(name = "city", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private String city;
+    //endregion
 
+    //region Constructors
     public User() {
     }
 
@@ -38,7 +41,9 @@ public class User extends BaseEntity implements Observer {
     public User(String errorMessage) {
         super.setError(errorMessage);
     }
+    //endregion
 
+    //region Getters and setters
     public String getName() {
         return name;
     }
@@ -62,7 +67,9 @@ public class User extends BaseEntity implements Observer {
     public void setCity(String city) {
         this.city = city;
     }
+    //endregion
 
+    //region Public methods
     @JsonIgnore
     public boolean isValid() {
         if (!getError()
@@ -83,4 +90,5 @@ public class User extends BaseEntity implements Observer {
     public String toString() {
         return "Naam: " + getName() + " adres: " + getAddress() + " stad: " + getCity();
     }
+    //endregion
 }

@@ -15,14 +15,17 @@ import javax.persistence.Table;
 @Table(name = "Companies")
 public class Company extends BaseEntity implements Observer {
 
+    //region Private attributes
     @Column(name = "name", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private String name;
+
     @Column(name = "address", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private String address;
+    //endregion
 
-
+    //region Constructors
     public Company() {
     }
 
@@ -34,7 +37,9 @@ public class Company extends BaseEntity implements Observer {
     public Company(String errorMessage) {
         super.setError(errorMessage);
     }
+    //endregion
 
+    //region Getters and setters
     public String getName() {
         return name;
     }
@@ -50,7 +55,9 @@ public class Company extends BaseEntity implements Observer {
     public void setAddress(String address) {
         this.address = address;
     }
+    //endregion
 
+    //region Public methods
     @JsonIgnore
     public boolean isValid() {
         if (!getError()
@@ -65,4 +72,5 @@ public class Company extends BaseEntity implements Observer {
     public void Update() {
         System.out.println("VerhuurderObserverTest");
     }
+    //endregion
 }

@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "Vehicles")
 public class Vehicle extends BaseEntity {
 
+    //region Private attributes
     @Column(name = "licence_plate", unique = true, nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private String licencePlate;
@@ -27,7 +28,9 @@ public class Vehicle extends BaseEntity {
     @Column(name = "mileage", nullable = false)
     @JsonInclude(Include.NON_DEFAULT)
     private int mileage;
+    //endregion
 
+    //region Constructors
     public Vehicle() {
     }
 
@@ -41,7 +44,9 @@ public class Vehicle extends BaseEntity {
     public Vehicle(String errorMessage) {
         super.setError(errorMessage);
     }
+    //endregion
 
+    //region Getters and setters
     public String getLicencePlate() {
         return licencePlate;
     }
@@ -73,7 +78,9 @@ public class Vehicle extends BaseEntity {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+    //endregion
 
+    //region Public methods
     @JsonIgnore
     public boolean isValid() {
         if (!getError()
@@ -88,4 +95,5 @@ public class Vehicle extends BaseEntity {
     public String toString() {
         return "Kenteken: " + getLicencePlate() + " Voertuig: " + getVehicleName();
     }
+    //endregion
 }
