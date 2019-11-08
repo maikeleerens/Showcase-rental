@@ -5,7 +5,8 @@ import com.rental.infrastructure.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,39 +19,74 @@ public class BookingService {
     public List<Booking> getAllBookings() throws Exception {
         var bookingList = repository.findAll();
         if (bookingList.size() < 1) {
-            return Arrays.asList(new Booking("No bookings found"));
+            return null;
         }
-        return repository.findAll();
-    }
+        for (var booking:
+             bookingList) {
+            attachObservers(booking);
+        }
+        return bookingList;
+}
 
     public Booking getBookingById(UUID id) throws Exception {
-        return repository.findById(id).orElse(new Booking("No booking found with id: " + id));
+        var booking = repository.findById(id).orElse(null);
+        if (booking != null) {
+            attachObservers(booking);
+        }
+        return booking;
     }
 
     public Booking getBookingByBookingNumber(String bookingNumber) throws Exception {
-        return repository.findByBookingNumber(bookingNumber).orElse(new Booking("No booking found with booking number: " + bookingNumber));
+        var booking = repository.findByBookingNumber(bookingNumber).orElse(null);
+        if (booking != null) {
+            attachObservers(booking);
+        }
+        return booking;
     }
 
     public Booking createBooking(Booking booking) throws Exception {
         if (booking.isValid()) {
             repository.save(booking);
+            attachObservers(booking);
             return booking;
         } else {
-            return new Booking("Booking is invalid");
+            return null;
         }
     }
 
     public Booking updateBooking(UUID id, Booking booking) throws Exception {
         var bookingToUpdate = getBookingById(id);
         if (!bookingToUpdate.isValid())
-            return new Booking("Booking to update is invalid");
+            return null;
 
-        if (!booking.getError() && booking.isValid()) {
+        if (booking.isValid()) {
             booking.setId(id);
             repository.save(booking);
+            attachObservers(booking);
             return booking;
         } else {
-            return new Booking("Invalid booking");
+            return null;
         }
+    }
+
+    public List<Booking> getAllUnReturnedBookings() throws Exception {
+        var bookingList = repository.findBookingsByIsReturnedFalse();
+        if (bookingList.size() < 1) {
+            return null;
+        }
+        for (var booking:
+                bookingList) {
+            attachObservers(booking);
+        }
+        return bookingList;
+    }
+
+    public void attachObservers(Booking booking) throws Exception {
+        booking.Attach(booking.getUser());
+        booking.Attach(booking.getCompany());
+    }
+
+    public List<Booking> getAllExpiredAndUnReturnedBookings() throws Exception {
+        return repository.findAllEndDatePassedAndUnReturned(new Date());
     }
 }

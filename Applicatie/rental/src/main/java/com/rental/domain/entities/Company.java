@@ -17,11 +17,9 @@ public class Company extends BaseEntity implements Observer {
 
     //region Private attributes
     @Column(name = "name", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private String name;
 
     @Column(name = "address", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private String address;
     //endregion
 
@@ -32,10 +30,6 @@ public class Company extends BaseEntity implements Observer {
     public Company(String name, String address) {
         this.name = name;
         this.address = address;
-    }
-
-    public Company(String errorMessage) {
-        super.setError(errorMessage);
     }
     //endregion
 
@@ -60,8 +54,7 @@ public class Company extends BaseEntity implements Observer {
     //region Public methods
     @JsonIgnore
     public boolean isValid() {
-        if (!getError()
-                && (getName() != null && !getName().isEmpty())
+        if ((getName() != null && !getName().isEmpty())
                 && (getAddress() != null && !getAddress().isEmpty())) {
             return true;
         }

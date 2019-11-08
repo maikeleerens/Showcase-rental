@@ -14,19 +14,15 @@ public class Vehicle extends BaseEntity {
 
     //region Private attributes
     @Column(name = "licence_plate", unique = true, nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private String licencePlate;
 
     @Column(name = "vehicle_name", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private String vehicleName;
 
     @Column(name = "price_per_day", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private BigDecimal pricePerDay;
 
     @Column(name = "mileage", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private int mileage;
     //endregion
 
@@ -39,10 +35,6 @@ public class Vehicle extends BaseEntity {
         this.vehicleName = vehicleName;
         this.pricePerDay = pricePerDay;
         this.mileage = mileage;
-    }
-
-    public Vehicle(String errorMessage) {
-        super.setError(errorMessage);
     }
     //endregion
 
@@ -83,8 +75,7 @@ public class Vehicle extends BaseEntity {
     //region Public methods
     @JsonIgnore
     public boolean isValid() {
-        if (!getError()
-                && (getLicencePlate() != null && !getLicencePlate().isEmpty())
+        if (!(getLicencePlate() != null && !getLicencePlate().isEmpty())
                 && (getVehicleName() != null && !getVehicleName().isEmpty())) {
             return true;
         }

@@ -2,8 +2,6 @@ package com.rental.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
@@ -21,38 +19,31 @@ public class Booking extends BaseEntity implements Subject {
 
     //region Private attributes
     @Column(name = "booking_number", unique = true, nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     private String bookingNumber;
 
     @Column(name = "start_date", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startDate;
 
     @Column(name = "end_date", nullable = false)
-    @JsonInclude(Include.NON_DEFAULT)
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date endDate;
 
     @ManyToMany()
-    @JsonInclude(Include.NON_DEFAULT)
     private List<Vehicle> vehicles = new ArrayList<>();
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    @JsonInclude(Include.NON_DEFAULT)
     private User user;
 
     @ManyToOne()
     @JoinColumn(name = "company_id")
-    @JsonInclude(Include.NON_DEFAULT)
     private Company company;
 
-    @Column(name = "is_returned", nullable = false)
+    @Column(name = "returned", nullable = false)
     private boolean isReturned = false;
 
     @Column(name = "total_price")
-    @JsonInclude(Include.NON_DEFAULT)
     private BigDecimal totalPrice;
 
     @Transient
@@ -70,10 +61,6 @@ public class Booking extends BaseEntity implements Subject {
         this.vehicles = vehicles;
         this.user = user;
         this.company = company;
-    }
-
-    public Booking(String errorMessage) {
-        super.setError(errorMessage);
     }
     //endregion
 
@@ -146,8 +133,7 @@ public class Booking extends BaseEntity implements Subject {
     //region Public methods
     @JsonIgnore
     public boolean isValid() {
-        if (!getError()
-                && (getBookingNumber() != null && !getBookingNumber().isEmpty())
+        if ((getBookingNumber() != null && !getBookingNumber().isEmpty())
                 && (getStartDate() != null) && (getEndDate() != null)
                 && (getUser() != null) && (!getVehicles().isEmpty())
                 && (getCompany() != null)) {

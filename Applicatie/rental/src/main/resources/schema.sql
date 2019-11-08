@@ -32,7 +32,7 @@ start_date Date not null,
 end_date Date not null,
 user_id UUID not null,
 company_id UUID not null,
-is_returned bit not null,
+returned bit not null,
 total_price decimal(10,2) not null,
 FOREIGN KEY(user_id) references Users(id),
 FOREIGN KEY(company_id) references Companies(id)

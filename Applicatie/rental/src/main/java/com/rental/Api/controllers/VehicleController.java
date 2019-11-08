@@ -1,4 +1,4 @@
-package com.rental.application.controllers;
+package com.rental.Api.controllers;
 
 import com.rental.domain.entities.Vehicle;
 import com.rental.domain.services.VehicleService;
@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Documented;
 import java.util.UUID;
 
 @RestController
@@ -50,7 +49,10 @@ public class VehicleController {
     @PostMapping("/create")
     public ResponseEntity createVehicle(@RequestBody Vehicle vehicle) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.createVehicle(vehicle));
+            if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
+            var createdVehicle = service.createVehicle(vehicle);
+            if (createdVehicle == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create vehicle");
+            return ResponseEntity.status(HttpStatus.OK).body(createdVehicle);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -59,13 +61,11 @@ public class VehicleController {
     @PutMapping("/edit/{id}")
     public ResponseEntity editVehicle(@PathVariable UUID id, @RequestBody Vehicle vehicle) {
         try {
-            if ((id == null))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-
+            if ((id == null)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+            if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
             var updatedVehicle = service.updateVehicle(id, vehicle);
-            if (updatedVehicle.getError())
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(updatedVehicle.getErrorMessage());
-            return ResponseEntity.status(HttpStatus.OK).body("Vehicle with licence plate " + vehicle.getLicencePlate() + " is successfully updated");
+            if (updatedVehicle == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update vehicle");
+            return ResponseEntity.status(HttpStatus.OK).body(updatedVehicle);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

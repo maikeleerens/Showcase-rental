@@ -1,4 +1,4 @@
-package com.rental.application.controllers;
+package com.rental.Api.controllers;
 
 import com.rental.domain.entities.*;
 import com.rental.domain.services.UserService;
@@ -17,7 +17,7 @@ public class UserController {
     UserService service;
 
     @GetMapping
-    public ResponseEntity GetAllUsers() {
+    public ResponseEntity getAllUsers() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.getAllUsers());
         } catch (Exception ex) {
@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity GetUserById(@PathVariable("id") UUID id) {
+    public ResponseEntity getUserById(@PathVariable("id") UUID id) {
         try {
             if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
             return ResponseEntity.status(HttpStatus.OK).body(service.getUserById(id));
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/name{name}")
-    public ResponseEntity GetUserByName(@PathVariable("name") String name) {
+    public ResponseEntity getUserByName(@PathVariable("name") String name) {
         try {
             if (name == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Name is empty");
             return ResponseEntity.status(HttpStatus.OK).body(service.getUserByName(name));
@@ -46,19 +46,25 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity CreateUser(@RequestBody User user) {
+    public ResponseEntity createUser(@RequestBody User user) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.createUser(user));
+            if (!user.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is not valid");
+            var createdUser = service.createUser(user);
+            if (createdUser == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create user");
+            return ResponseEntity.status(HttpStatus.OK).body(createdUser);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity EditUser(@PathVariable("id") UUID id, @RequestBody User user) {
+    public ResponseEntity editUser(@PathVariable("id") UUID id, @RequestBody User user) {
         try {
             if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            return ResponseEntity.status(HttpStatus.OK).body(service.updateUser(id, user));
+            if (!user.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is not valid");
+            var updatedUser = service.updateUser(id, user);
+            if (updatedUser == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update user");
+            return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

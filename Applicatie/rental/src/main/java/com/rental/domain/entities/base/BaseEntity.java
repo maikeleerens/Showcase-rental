@@ -17,14 +17,6 @@ public class BaseEntity {
     @Column(name = "id", unique = true, nullable = false)
     @JsonInclude(Include.NON_NULL)
     private UUID id;
-
-    @Transient
-    @JsonInclude(Include.NON_DEFAULT)
-    private boolean error;
-
-    @Transient
-    @JsonInclude(Include.NON_NULL)
-    private String errorMessage;
     //endregion
 
     //region Getters and setters
@@ -34,26 +26,6 @@ public class BaseEntity {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public boolean getError() {
-        return error;
-    }
-
-    public void setError(String errorMessage) {
-        this.error = true;
-        this.errorMessage = errorMessage;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-    //endregion
-
-    //region Public methods
-    public void clearError() {
-        error = false;
-        errorMessage = null;
     }
     //endregion
 }
