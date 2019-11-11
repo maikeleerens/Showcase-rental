@@ -3,6 +3,7 @@ package com.rental.Api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@ComponentScan({"com.rental.domain.services", "com.rental.Api.controllers"})
+@ComponentScan({"com.rental.domain.services", "com.rental.Api.controllers", "com.rental.Api.config"})
 @EntityScan("com.rental.domain.entities")
 @EnableJpaRepositories("com.rental.infrastructure.repositories")
 public class Application {
@@ -23,15 +24,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Configuration
-    @EnableSwagger2
-    public class SwaggerConfig {
-        @Bean
-        public Docket api() {
-            return new Docket(DocumentationType.SWAGGER_2)
-                    .select()
-                    .apis(RequestHandlerSelectors.basePackage("com.rental.Api.controllers"))
-                    .paths(PathSelectors.any())
-                    .build();
-        }
-}}
+    }
