@@ -69,4 +69,15 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
+
+    @GetMapping("/notifications/{id}")
+    public ResponseEntity getUserNotifications(@PathVariable UUID id) {
+        try {
+            if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getUserNotifications(id));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+    }
+
 }

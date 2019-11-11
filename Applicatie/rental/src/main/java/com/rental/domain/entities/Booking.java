@@ -18,6 +18,10 @@ import java.util.List;
 public class Booking extends BaseEntity implements Subject {
 
     //region Private attributes
+    @JsonIgnore
+    @Transient
+    private static BigDecimal extraCostPerDay = new BigDecimal(30.00);
+
     @Column(name = "booking_number", unique = true, nullable = false)
     private String bookingNumber;
 
@@ -65,6 +69,10 @@ public class Booking extends BaseEntity implements Subject {
     //endregion
 
     //region Getters and setters
+    public BigDecimal getExtraCostPerDay() {
+        return extraCostPerDay;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -154,9 +162,15 @@ public class Booking extends BaseEntity implements Subject {
 
     @Override
     public void Notify() {
+        setTotalPrice(getTotalPrice().add(getExtraCostPerDay()));
         for (var observer : observers) {
-            observer.Update();
+            observer.Update("Boeking " + getBookingNumber() + " met einddatum " + getEndDate() + " is nog niet teruggebracht. Extra kosten bedragen €" + getExtraCostPerDay() + " per dag. Nieuwe totaalprijs: €" + getTotalPrice());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Boeking: " + getBookingNumber() + " startdatum: " + getStartDate() + " einddatum: " + getEndDate() + " totaalprijs: €" + getTotalPrice();
     }
     //endregion
 }

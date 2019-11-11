@@ -5,7 +5,6 @@ import com.rental.infrastructure.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -81,12 +80,23 @@ public class BookingService {
         return bookingList;
     }
 
+    public List<Booking> getAllExpiredAndUnReturnedBookings() throws Exception {
+        var bookingList = repository.findAllEndDatePassedAndUnReturned(new Date());
+        if (bookingList.size() < 1) {
+            return null;
+        }
+        for (var booking:
+                bookingList) {
+            attachObservers(booking);
+            booking.Notify();
+            repository.save(booking);
+        }
+        return bookingList;
+    }
+
     public void attachObservers(Booking booking) throws Exception {
         booking.Attach(booking.getUser());
         booking.Attach(booking.getCompany());
     }
 
-    public List<Booking> getAllExpiredAndUnReturnedBookings() throws Exception {
-        return repository.findAllEndDatePassedAndUnReturned(new Date());
-    }
 }

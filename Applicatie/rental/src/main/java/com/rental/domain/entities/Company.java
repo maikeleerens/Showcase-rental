@@ -8,8 +8,10 @@ import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "Companies")
@@ -21,6 +23,10 @@ public class Company extends BaseEntity implements Observer {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @ElementCollection
+    @Column(name = "notification")
+    private List<String> notifications;
     //endregion
 
     //region Constructors
@@ -49,6 +55,10 @@ public class Company extends BaseEntity implements Observer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public void addNotification(String notification) {
+        notifications.add(notification);
+    }
     //endregion
 
     //region Public methods
@@ -62,8 +72,8 @@ public class Company extends BaseEntity implements Observer {
     }
 
     @Override
-    public void Update() {
-        System.out.println("VerhuurderObserverTest");
+    public void Update(String message) {
+        addNotification(message);
     }
     //endregion
 }

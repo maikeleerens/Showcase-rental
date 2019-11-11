@@ -56,4 +56,12 @@ public class UserService {
             return null;
         }
     }
+
+    public List<String> getUserNotifications(UUID id) throws Exception {
+        var notifications = repository.findAllUserNotifications(id);
+        if (notifications.size() < 1) {
+            return null;
+        }
+        return notifications;
+    }
 }

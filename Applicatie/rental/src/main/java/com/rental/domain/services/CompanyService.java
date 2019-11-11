@@ -48,4 +48,12 @@ public class CompanyService {
             return null;
         }
     }
+
+    public List<String> getCompanyNotifications(UUID id) throws Exception {
+        var notifications = repository.findAllCompanyNotifications(id);
+        if (notifications.size() < 1) {
+            return null;
+        }
+        return notifications;
+    }
 }

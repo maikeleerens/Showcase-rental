@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
     Optional<Booking> findByBookingNumber(String bookingNumber);
     List<Booking> findBookingsByIsReturnedFalse();
-   //@Query("SELECT b FROM Bookings b WHERE end_date > :currentDate AND returned = false", nativeQuery = true)
+   @Query(value = "SELECT * FROM Bookings WHERE end_date < :currentDate AND returned = false", nativeQuery = true)
     List<Booking> findAllEndDatePassedAndUnReturned(Date currentDate);
 }

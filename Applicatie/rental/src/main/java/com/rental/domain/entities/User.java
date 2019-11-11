@@ -6,9 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -23,6 +22,10 @@ public class User extends BaseEntity implements Observer {
 
     @Column(name = "city", nullable = false)
     private String city;
+
+    @ElementCollection
+    @Column(name = "notification")
+    private List<String> notifications;
     //endregion
 
     //region Constructors
@@ -60,6 +63,10 @@ public class User extends BaseEntity implements Observer {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void addNotification(String notification) {
+        notifications.add(notification);
+    }
     //endregion
 
     //region Public methods
@@ -74,8 +81,8 @@ public class User extends BaseEntity implements Observer {
     }
 
     @Override
-    public void Update() {
-        System.out.println("HuurderObservertTest");
+    public void Update(String message) {
+        addNotification(message);
     }
 
     @Override

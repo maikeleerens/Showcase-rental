@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @RestController
@@ -35,11 +36,11 @@ public class BookingController {
         }
     }
 
-    @GetMapping("/number/{number}")
-    public ResponseEntity getBookingByNumber(@PathVariable String number) {
+    @GetMapping("/number/{bookingNumber}")
+    public ResponseEntity getBookingByNumber(@PathVariable String bookingNumber) {
         try {
-            if (number == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking number is empty");
-            return ResponseEntity.status(HttpStatus.OK).body(service.getBookingByBookingNumber(number));
+            if (bookingNumber == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking number is empty");
+            return ResponseEntity.status(HttpStatus.OK).body(service.getBookingByBookingNumber(bookingNumber));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -81,7 +82,7 @@ public class BookingController {
     }
 
     @PostMapping("/return/{bookingNumber}")
-    public ResponseEntity ReturnBookingByBookingNumber(@PathVariable String bookingNumber) {
+    public ResponseEntity returnBookingByBookingNumber(@PathVariable String bookingNumber) {
         try {
             if (bookingNumber == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking number is empty");
             var bookingToReturn = service.getBookingByBookingNumber(bookingNumber);
@@ -98,8 +99,8 @@ public class BookingController {
     @GetMapping("/notify")
     public ResponseEntity notifyBookingObservers() {
         try {
-            var booking = service.getAllExpiredAndUnReturnedBookings();
-            return ResponseEntity.status(HttpStatus.OK).body("Observers notified");
+            var bookings = service.getAllExpiredAndUnReturnedBookings();
+            return ResponseEntity.status(HttpStatus.OK).body(bookings);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
