@@ -26,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -57,6 +58,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Maikel Eerens\Documents\School\Semester 2\Showcase\Applicatie\rental\Services\src" />
       <recent name="C:\Users\Maikel Eerens\IdeaProjects\Rental\Api\src\main\java\com\rental\api\config" />
     </key>
   </component>
@@ -72,7 +74,87 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UserServiceTest.createUser_Returns_Null_On_Invalid_User">
+    <configuration name="UserServiceTest.createUser_Returns_Null_On_Invalid_User" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="METHOD_NAME" value="createUser_Returns_Null_On_Invalid_User" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.createUser_Returns_User" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="METHOD_NAME" value="createUser_Returns_User" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.getUserById_Returns_Null_On_Non_Existing_Id" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="METHOD_NAME" value="getUserById_Returns_Null_On_Non_Existing_Id" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.getUserByName_Returns_List_Of_Users" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="METHOD_NAME" value="getUserByName_Returns_List_Of_Users" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.getUserByName_Returns_Null_On_Non_Existing_Name" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="METHOD_NAME" value="getUserByName_Returns_Null_On_Non_Existing_Name" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="Api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.rental.api.Application" />
@@ -80,6 +162,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserServiceTest.createUser_Returns_Null_On_Invalid_User" />
+        <item itemvalue="JUnit.UserServiceTest.createUser_Returns_User" />
+        <item itemvalue="JUnit.UserServiceTest.getUserByName_Returns_Null_On_Non_Existing_Name" />
+        <item itemvalue="JUnit.UserServiceTest.getUserByName_Returns_List_Of_Users" />
+        <item itemvalue="JUnit.UserServiceTest.getUserById_Returns_Null_On_Non_Existing_Id" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -94,10 +185,31 @@
       <workItem from="1573811079665" duration="11926000" />
       <workItem from="1574074946607" duration="1847000" />
       <workItem from="1574095000025" duration="8037000" />
+      <workItem from="1574700571508" duration="4684000" />
+      <workItem from="1574710481740" duration="2555000" />
+      <workItem from="1574755671323" duration="634000" />
+      <workItem from="1574761304086" duration="5909000" />
+      <workItem from="1574782801932" duration="595000" />
+      <workItem from="1574847601496" duration="3293000" />
+      <workItem from="1574863312885" duration="1327000" />
+      <workItem from="1574871199760" duration="284000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

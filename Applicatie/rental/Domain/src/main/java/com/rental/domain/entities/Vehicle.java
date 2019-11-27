@@ -75,8 +75,8 @@ public class Vehicle extends BaseEntity {
     //region Public methods
     @JsonIgnore
     public boolean isValid() {
-        if (!(getLicencePlate() != null && !getLicencePlate().isEmpty())
-                && (getVehicleName() != null && !getVehicleName().isEmpty())) {
+        if ((getLicencePlate() != null && !getLicencePlate().isBlank())
+                && (getVehicleName() != null && !getVehicleName().isBlank())) {
             return true;
         }
         return false;
