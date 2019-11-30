@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.rental.services", "com.rental.api.controllers", "com.rental.api.config"})
-@EntityScan("com.rental.domain.entities")
+@ComponentScan({"com.rental.services", "com.rental.api.controllers", "com.rental.api.config", "com.rental.infrastructure.repositories"})
+@EntityScan({"com.rental.infrastructure.datamodels", "com.rental.domain.entities"})
 @EnableJpaRepositories("com.rental.infrastructure.repositories")
 public class Application {
 

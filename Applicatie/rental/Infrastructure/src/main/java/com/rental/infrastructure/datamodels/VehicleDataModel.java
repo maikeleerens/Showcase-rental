@@ -1,16 +1,17 @@
-package com.rental.domain.entities;
+package com.rental.infrastructure.datamodels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.rental.domain.entities.base.BaseEntity;
+import com.rental.domain.interfaces.entities.Vehicle;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Vehicles")
-public class Vehicle extends BaseEntity {
+public class VehicleDataModel extends BaseEntity implements Vehicle {
 
     //region Private attributes
     @Column(name = "licence_plate", unique = true, nullable = false)
@@ -27,10 +28,17 @@ public class Vehicle extends BaseEntity {
     //endregion
 
     //region Constructors
-    public Vehicle() {
+    public VehicleDataModel() {
     }
 
-    public Vehicle(String licencePlate, String vehicleName, BigDecimal pricePerDay, int mileage) {
+    public VehicleDataModel(Vehicle vehicle) {
+        this.licencePlate = vehicle.getLicencePlate();
+        this.vehicleName = vehicle.getVehicleName();
+        this.pricePerDay = vehicle.getPricePerDay();
+        this.mileage = vehicle.getMileage();
+    }
+
+    public VehicleDataModel(String licencePlate, String vehicleName, BigDecimal pricePerDay, int mileage) {
         this.licencePlate = licencePlate;
         this.vehicleName = vehicleName;
         this.pricePerDay = pricePerDay;
@@ -39,52 +47,48 @@ public class Vehicle extends BaseEntity {
     //endregion
 
     //region Getters and setters
+    @Override
     public String getLicencePlate() {
         return licencePlate;
     }
 
+    @Override
     public void setLicencePlate(String licencePlate) {
         this.licencePlate = licencePlate;
     }
 
+    @Override
     public String getVehicleName() {
         return vehicleName;
     }
 
+    @Override
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
     }
 
+    @Override
     public BigDecimal getPricePerDay() {
         return pricePerDay;
     }
 
+    @Override
     public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
 
+    @Override
     public int getMileage() {
         return mileage;
     }
 
+    @Override
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
     //endregion
 
     //region Public methods
-    @JsonIgnore
-    public boolean isValid() {
-        if ((getLicencePlate() != null && !getLicencePlate().isBlank())
-                && (getVehicleName() != null && !getVehicleName().isBlank())) {
-            return true;
-        }
-        return false;
-    }
 
-    @Override
-    public String toString() {
-        return "Kenteken: " + getLicencePlate() + " Voertuig: " + getVehicleName();
-    }
     //endregion
 }

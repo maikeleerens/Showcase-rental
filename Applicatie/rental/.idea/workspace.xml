@@ -26,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -74,7 +75,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserServiceTest.createUser_Returns_Null_On_Invalid_User">
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceTest.createUser_Returns_Null_On_Invalid_User" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
       <extension name="coverage">
@@ -107,23 +123,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.getUserById_Returns_Null_On_Non_Existing_Id" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="VehicleServiceTest and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rental.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rental.services" />
-      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
-      <option name="METHOD_NAME" value="getUserById_Returns_Null_On_Non_Existing_Id" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="com.rental.services.VehicleServiceTest" />
+        <pattern testClass="com.rental.services.UserServiceTest" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.getUserByName_Returns_List_Of_Users" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="VehicleServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
       <extension name="coverage">
         <pattern>
@@ -132,25 +143,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.rental.services" />
-      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
-      <option name="METHOD_NAME" value="getUserByName_Returns_List_Of_Users" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.getUserByName_Returns_Null_On_Non_Existing_Name" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Services" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rental.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rental.services" />
-      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
-      <option name="METHOD_NAME" value="getUserByName_Returns_Null_On_Non_Existing_Name" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.VehicleServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.VehicleServiceTest and 1 more" />
+        <item itemvalue="JUnit.VehicleServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest" />
         <item itemvalue="JUnit.UserServiceTest.createUser_Returns_Null_On_Invalid_User" />
         <item itemvalue="JUnit.UserServiceTest.createUser_Returns_User" />
-        <item itemvalue="JUnit.UserServiceTest.getUserByName_Returns_Null_On_Non_Existing_Name" />
-        <item itemvalue="JUnit.UserServiceTest.getUserByName_Returns_List_Of_Users" />
-        <item itemvalue="JUnit.UserServiceTest.getUserById_Returns_Null_On_Non_Existing_Id" />
       </list>
     </recent_temporary>
   </component>
@@ -193,6 +187,12 @@
       <workItem from="1574847601496" duration="3293000" />
       <workItem from="1574863312885" duration="1327000" />
       <workItem from="1574871199760" duration="284000" />
+      <workItem from="1574966658795" duration="810000" />
+      <workItem from="1575015243272" duration="4497000" />
+      <workItem from="1575023528061" duration="3978000" />
+      <workItem from="1575030251786" duration="5398000" />
+      <workItem from="1575107031749" duration="3539000" />
+      <workItem from="1575115822123" duration="6242000" />
     </task>
     <servers />
   </component>

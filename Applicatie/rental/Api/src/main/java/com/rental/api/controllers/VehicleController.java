@@ -1,6 +1,8 @@
 package com.rental.api.controllers;
 
-import com.rental.domain.entities.Vehicle;
+import com.rental.api.viewmodels.vehicle.CreateVehicleViewModel;
+import com.rental.api.viewmodels.vehicle.UpdateVehicleViewModel;
+import com.rental.api.viewmodels.vehicle.VehicleViewModel;
 import com.rental.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,32 +26,32 @@ public class VehicleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
+//
+//    @GetMapping("/id/{id}")
+//    public ResponseEntity getVehicleById(@PathVariable UUID id) {
+//        try {
+//            if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
+//            return ResponseEntity.status(HttpStatus.OK).body(service.getVehicleById(id));
+//        } catch (Exception ex) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+//        }
+//    }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity getVehicleById(@PathVariable UUID id) {
+    @GetMapping("plate/{licencePlate}")
+    public ResponseEntity getVehicleByLicencePlate(@PathVariable String licencePlate) {
         try {
-            if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            return ResponseEntity.status(HttpStatus.OK).body(service.getVehicleById(id));
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-        }
-    }
-
-    @GetMapping("plate/{licenceplate}")
-    public ResponseEntity getVehicleByLicencePlate(@PathVariable String licenceplate) {
-        try {
-            if (licenceplate == null)
+            if (licencePlate == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Licence plate is empty");
-            return ResponseEntity.status(HttpStatus.OK).body(service.getByLicencePlate(licenceplate));
+            return ResponseEntity.status(HttpStatus.OK).body(new VehicleViewModel(service.getByLicencePlate(licencePlate)));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
     @PostMapping("/create")
-    public ResponseEntity createVehicle(@RequestBody Vehicle vehicle) {
+    public ResponseEntity createVehicle(@RequestBody CreateVehicleViewModel vehicle) {
         try {
-            if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
+            //if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
             var createdVehicle = service.createVehicle(vehicle);
             if (createdVehicle == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create vehicle");
             return ResponseEntity.status(HttpStatus.OK).body(createdVehicle);
@@ -58,12 +60,11 @@ public class VehicleController {
         }
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity editVehicle(@PathVariable UUID id, @RequestBody Vehicle vehicle) {
+    @PutMapping("/edit")
+    public ResponseEntity editVehicle(@RequestBody UpdateVehicleViewModel vehicle) {
         try {
-            if ((id == null)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
-            var updatedVehicle = service.updateVehicle(id, vehicle);
+            //if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
+            VehicleViewModel updatedVehicle = new VehicleViewModel(service.updateVehicle(vehicle));
             if (updatedVehicle == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update vehicle");
             return ResponseEntity.status(HttpStatus.OK).body(updatedVehicle);
         } catch (Exception ex) {
