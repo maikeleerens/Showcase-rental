@@ -82,8 +82,9 @@ public class UserController {
     public ResponseEntity getUserNotifications(@PathVariable UUID id) {
         try {
             if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            if (service.getUserNotifications(id) == null) return ResponseEntity.status(HttpStatus.OK).body("No notifications found");
-            return ResponseEntity.status(HttpStatus.OK).body(service.getUserNotifications(id));
+            var notifications = service.getUserNotifications(id);
+            if (notifications == null) return ResponseEntity.status(HttpStatus.OK).body("No notifications found");
+            return ResponseEntity.status(HttpStatus.OK).body(notifications);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

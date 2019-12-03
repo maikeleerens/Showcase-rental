@@ -1,7 +1,8 @@
 package com.rental.services;
 
-import com.rental.domain.entities.Company;
-import com.rental.infrastructure.repositories.CompanyRepository;
+import com.rental.domain.interfaces.entities.Company;
+import com.rental.infrastructure.repositories.CompanyRepositoryImpl;
+import com.rental.services.models.CompanyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,45 +18,42 @@ import java.util.UUID;
 public class CompanyService {
 
     @Autowired
-    CompanyRepository repository;
+    CompanyRepositoryImpl repository;
 
-    public List<Company> getAllCompanies() throws Exception {
-        var vehicleList = repository.findAll();
-        if (vehicleList.size() < 1) {
+    public List<? extends Company> getAllCompanies() throws Exception {
+        var companyList = repository.getAll();
+        if (companyList.size() < 1) {
             return null;
         }
-        return repository.findAll();
+        return companyList;
     }
 
     public Company getCompanyById(UUID id) throws Exception {
-        return repository.findById(id).orElse(null);
+        return repository.getById(id).orElse(null);
     }
 
     public Company createCompany(Company company) throws Exception {
-        if (company.isValid()) {
-            repository.save(company);
-            return company;
+        var companyEntity = new CompanyEntity(company);
+        if (companyEntity.isValid()) {
+            var createdCompany = repository.save(companyEntity);
+            return createdCompany.orElse(null);
         } else {
             return null;
         }
     }
 
-    public Company updateCompany(UUID id, Company company) throws Exception {
-        var companyToUpdate = getCompanyById(id);
-        if (!companyToUpdate.isValid())
-            return null;
-
-        if (company.isValid()) {
-            company.setId(id);
-            repository.save(company);
-            return company;
+    public Company updateCompany(Company company) throws Exception {
+        var companyEntity = new CompanyEntity(company);
+        if (companyEntity.isValid()) {
+            var updatedCompany = repository.update(companyEntity);
+            return updatedCompany.orElse(null);
         } else {
             return null;
         }
     }
 
     public List<String> getCompanyNotifications(UUID id) throws Exception {
-        var notifications = repository.findAllCompanyNotifications(id);
+        var notifications = repository.getAllCompanyNotifications(id);
         if (notifications.size() < 1) {
             return null;
         }
