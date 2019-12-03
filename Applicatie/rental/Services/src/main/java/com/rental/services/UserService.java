@@ -1,7 +1,8 @@
 package com.rental.services;
 
-import com.rental.domain.entities.User;
-import com.rental.infrastructure.repositories.UserRepository;
+import com.rental.domain.interfaces.entities.User;
+import com.rental.infrastructure.repositories.UserRepositoryImpl;
+import com.rental.services.models.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,10 +18,10 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    UserRepository repository;
+    UserRepositoryImpl repository;
 
-    public List<User> getAllUsers() throws Exception {
-        var userList = repository.findAll();
+    public List<? extends User> getAllUsers() throws Exception {
+        var userList = repository.getAll();
         if (userList.size() < 1) {
             return null;
         }
@@ -30,11 +29,11 @@ public class UserService {
     }
 
     public User getUserById(UUID id) throws Exception {
-        return repository.findById(id).orElse(null);
+        return repository.getById(id).orElse(null);
     }
 
-    public List<User> getUserByName(String name) throws Exception {
-        var userList = repository.findByName(name);
+    public List<? extends User> getUserByName(String name) throws Exception {
+        var userList = repository.getByName(name);
         if (userList.size() < 1) {
             return null;
         }
@@ -42,30 +41,27 @@ public class UserService {
     }
 
     public User createUser(User user) throws Exception {
-        if (user.isValid()) {
-            repository.save(user);
-            return user;
+        var userEntity = new UserEntity(user);
+        if (userEntity.isValid()) {
+            var createdUser = repository.save(userEntity);
+            return createdUser.orElse(null);
         } else {
             return null;
         }
     }
 
-    public User updateUser(UUID id, User user) throws Exception {
-        var userToUpdate = getUserById(id);
-        if (!userToUpdate.isValid())
-            return null;
-
-        if (user.isValid()) {
-            user.setId(id);
-            repository.save(user);
-            return user;
+    public User updateUser(User user) throws Exception {
+        var userEntity = new UserEntity(user);
+        if (userEntity.isValid()) {
+            repository.update(userEntity).orElse(null);
+            return userEntity;
         } else {
             return null;
         }
     }
 
     public List<String> getUserNotifications(UUID id) throws Exception {
-        var notifications = repository.findAllUserNotifications(id);
+        var notifications = repository.getAllUserNotifications(id);
         if (notifications.size() < 1) {
             return null;
         }

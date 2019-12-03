@@ -26,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -75,7 +75,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
+  <component name="RunManager" selected="JUnit.UserServiceTest">
     <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
       <extension name="coverage">
@@ -87,22 +87,6 @@
       <option name="PACKAGE_NAME" value="com.rental.services" />
       <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.createUser_Returns_Null_On_Invalid_User" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Services" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rental.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rental.services" />
-      <option name="MAIN_CLASS_NAME" value="com.rental.services.UserServiceTest" />
-      <option name="METHOD_NAME" value="createUser_Returns_Null_On_Invalid_User" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,17 +107,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VehicleServiceTest and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Services" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="com.rental.services.VehicleServiceTest" />
-        <pattern testClass="com.rental.services.UserServiceTest" />
-      </patterns>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="VehicleServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
       <extension name="coverage">
@@ -149,6 +122,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VehicleServiceTest.createVehicle_Returns_Vehicle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.VehicleServiceTest" />
+      <option name="METHOD_NAME" value="createVehicle_Returns_Vehicle" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VehicleServiceTest.getAllVehicles_Returns_List_Of_Vehicles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.VehicleServiceTest" />
+      <option name="METHOD_NAME" value="getAllVehicles_Returns_List_Of_Vehicles" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="Api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.rental.api.Application" />
@@ -158,11 +163,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.VehicleServiceTest and 1 more" />
-        <item itemvalue="JUnit.VehicleServiceTest" />
         <item itemvalue="JUnit.UserServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest.createUser_Returns_Null_On_Invalid_User" />
         <item itemvalue="JUnit.UserServiceTest.createUser_Returns_User" />
+        <item itemvalue="JUnit.VehicleServiceTest.createVehicle_Returns_Vehicle" />
+        <item itemvalue="JUnit.VehicleServiceTest.getAllVehicles_Returns_List_Of_Vehicles" />
+        <item itemvalue="JUnit.VehicleServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -193,6 +198,12 @@
       <workItem from="1575030251786" duration="5398000" />
       <workItem from="1575107031749" duration="3539000" />
       <workItem from="1575115822123" duration="6242000" />
+      <workItem from="1575285861175" duration="5477000" />
+      <workItem from="1575294324778" duration="72000" />
+      <workItem from="1575295074266" duration="1249000" />
+      <workItem from="1575296424439" duration="6080000" />
+      <workItem from="1575304572116" duration="5885000" />
+      <workItem from="1575377508132" duration="1037000" />
     </task>
     <servers />
   </component>
@@ -211,5 +222,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/VehicleServiceTest.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/VehicleServiceTest.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="expectedVehicles.get(0)" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

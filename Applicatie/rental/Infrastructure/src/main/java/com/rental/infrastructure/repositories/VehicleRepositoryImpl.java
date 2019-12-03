@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 @Repository
 @Transactional
 public class VehicleRepositoryImpl implements VehicleRepository {
@@ -32,14 +29,18 @@ public class VehicleRepositoryImpl implements VehicleRepository {
         } catch(NoResultException ex) {
             return new ArrayList<>();
         }
-
     }
 
     @Override
     public Optional<Vehicle> getById(UUID id) {
-        String sql = "SELECT v FROM VehicleDataModel v WHERE id = :id";
-        final TypedQuery<VehicleDataModel> query = em.createQuery(sql, VehicleDataModel.class);
-        return Optional.of(query.getSingleResult());
+        try {
+            String sql = "SELECT v FROM VehicleDataModel v WHERE id = :id";
+            final TypedQuery<VehicleDataModel> query = em.createQuery(sql, VehicleDataModel.class);
+            query.setParameter("id", id);
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
     }
 
     @Override

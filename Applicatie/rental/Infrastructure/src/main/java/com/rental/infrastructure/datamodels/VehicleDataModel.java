@@ -1,8 +1,5 @@
 package com.rental.infrastructure.datamodels;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Vehicle;
 
@@ -32,6 +29,7 @@ public class VehicleDataModel extends BaseEntity implements Vehicle {
     }
 
     public VehicleDataModel(Vehicle vehicle) {
+        setId(vehicle.getId());
         this.licencePlate = vehicle.getLicencePlate();
         this.vehicleName = vehicle.getVehicleName();
         this.pricePerDay = vehicle.getPricePerDay();

@@ -40,47 +40,61 @@ public class VehicleViewModel implements Vehicle {
     //region Getters setters
 
     @Override
+    @JsonProperty("vehicle_id")
     public UUID getId() {
         return Id;
     }
 
     @Override
+    @JsonProperty("vehicle_id")
     public void setId(UUID Id) {
         this.Id = Id;
     }
 
     @Override
+    @JsonProperty("licence_plate")
     public String getLicencePlate() {
         return licencePlate;
     }
 
+    @Override
+    @JsonProperty("licence_plate")
     public void setLicencePlate(String licencePlate) {
         this.licencePlate = licencePlate;
     }
 
     @Override
+    @JsonProperty("vehicle_name")
     public String getVehicleName() {
         return vehicleName;
     }
 
+    @Override
+    @JsonProperty("vehicle_name")
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
     }
 
     @Override
+    @JsonProperty("price_per_day")
     public BigDecimal getPricePerDay() {
         return pricePerDay;
     }
 
+    @Override
+    @JsonProperty("price_per_day")
     public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
 
     @Override
+    @JsonProperty("mileage")
     public int getMileage() {
         return mileage;
     }
 
+    @Override
+    @JsonProperty("mileage")
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
@@ -89,9 +103,6 @@ public class VehicleViewModel implements Vehicle {
 
     //region Public methods
 
-    public static VehicleViewModel toVehicleViewModel(Vehicle vehicle) {
-        return new VehicleViewModel(vehicle);
-    }
     //endregion
 
 }
