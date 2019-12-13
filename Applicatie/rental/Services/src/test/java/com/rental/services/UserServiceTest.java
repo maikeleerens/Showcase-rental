@@ -2,7 +2,6 @@ package com.rental.services;
 
 import com.rental.domain.interfaces.entities.User;
 import com.rental.infrastructure.repositories.UserRepositoryImpl;
-import com.rental.infrastructure.repositories.interfaces.UserRepository;
 import com.rental.services.models.UserEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,12 +10,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class UserServiceTest {

@@ -2,8 +2,6 @@ package com.rental.infrastructure.repositories.interfaces;
 
 import com.rental.domain.interfaces.entities.User;
 import com.rental.infrastructure.repositories.interfaces.base.BaseRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

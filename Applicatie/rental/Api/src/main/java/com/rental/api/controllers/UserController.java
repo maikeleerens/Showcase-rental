@@ -1,16 +1,15 @@
 package com.rental.api.controllers;
 
+import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.user.CreateUserViewModel;
 import com.rental.api.viewmodels.user.UpdateUserViewModel;
 import com.rental.api.viewmodels.user.UserViewModel;
-import com.rental.domain.entities.*;
 import com.rental.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -56,8 +55,7 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody CreateUserViewModel user) {
         try {
-            //if (!user.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is not valid");
-            var createdUser = service.createUser(user);
+            var createdUser = service.createUser(ViewModelHelper.toUserViewModel(user));
             if (createdUser == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create user");
             return ResponseEntity.status(HttpStatus.OK).body(new UserViewModel(createdUser));
         } catch (Exception ex) {

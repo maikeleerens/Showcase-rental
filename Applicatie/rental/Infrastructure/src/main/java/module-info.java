@@ -1,10 +1,9 @@
 module Infrastructure {
+    requires Domain;
     requires spring.data.jpa;
     requires spring.context;
-    requires Domain;
-    requires com.fasterxml.jackson.annotation;
-    requires java.persistence;
-    requires org.hibernate.orm.core;
     requires spring.tx;
+    requires java.persistence;
+    requires com.fasterxml.jackson.annotation;
     exports com.rental.infrastructure.repositories;
 }

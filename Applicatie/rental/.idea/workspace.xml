@@ -207,7 +207,17 @@
       <workItem from="1575377508132" duration="3320000" />
       <workItem from="1575380908683" duration="16000" />
       <workItem from="1575383727354" duration="896000" />
-      <workItem from="1575411062975" duration="2580000" />
+      <workItem from="1575411062975" duration="6554000" />
+      <workItem from="1575450374986" duration="539000" />
+      <workItem from="1575465932827" duration="3033000" />
+      <workItem from="1575469919298" duration="101000" />
+      <workItem from="1575470160860" duration="2855000" />
+      <workItem from="1575641424266" duration="2252000" />
+      <workItem from="1575894612978" duration="6076000" />
+      <workItem from="1575902291953" duration="2312000" />
+      <workItem from="1575904972836" duration="2430000" />
+      <workItem from="1575909981746" duration="3829000" />
+      <workItem from="1576239342610" duration="5010000" />
     </task>
     <servers />
   </component>
@@ -242,8 +252,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java</url>
-          <line>110</line>
+          <line>109</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Services/src/main/java/com/rental/services/BookingService.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -251,6 +286,12 @@
       <configuration name="JUnit">
         <watch expression="expectedVehicles.get(0)" />
       </configuration>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="((NullPointerException)ex).detailMessage" custom="java.lang.NullPointerException" />
+      </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/rental$Application.ic" NAME="Application Coverage Results" MODIFIED="1575898729771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

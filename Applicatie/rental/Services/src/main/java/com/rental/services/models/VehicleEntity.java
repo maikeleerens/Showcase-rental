@@ -23,7 +23,7 @@ public class VehicleEntity extends BaseEntity implements Vehicle {
     }
 
     public VehicleEntity(Vehicle vehicle) {
-        setId(vehicle.getId());
+        super.setId(vehicle.getId());
         this.licencePlate = vehicle.getLicencePlate();
         this.vehicleName = vehicle.getVehicleName();
         this.pricePerDay = vehicle.getPricePerDay();

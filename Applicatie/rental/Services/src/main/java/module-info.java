@@ -1,8 +1,8 @@
 module Services {
-    requires Infrastructure;
-    requires Domain;
-    requires spring.beans;
     requires spring.context;
+    requires Domain;
+    requires Infrastructure;
+    requires spring.beans;
     requires com.fasterxml.jackson.annotation;
     exports com.rental.services;
 }

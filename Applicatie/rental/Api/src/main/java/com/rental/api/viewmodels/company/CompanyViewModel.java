@@ -3,7 +3,6 @@ package com.rental.api.viewmodels.company;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rental.domain.interfaces.entities.Company;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +23,15 @@ public class CompanyViewModel implements Company {
     //endregion
 
     //region Constructors
+    public CompanyViewModel(String name, String address) {
+        this.address = address;
+        this.name = name;
+    }
+
+    public CompanyViewModel(UUID companyId) {
+        id = companyId;
+    }
+
     public CompanyViewModel(Company company) {
         id = company.getId();
         name = company.getName();

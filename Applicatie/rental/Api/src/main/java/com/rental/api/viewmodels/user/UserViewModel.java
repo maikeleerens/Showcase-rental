@@ -26,6 +26,16 @@ public class UserViewModel implements User {
     //endregion
 
     //region Constructors
+    public UserViewModel(UUID userId) {
+        id = userId;
+    }
+
+    public UserViewModel(String name, String address, String city) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+    }
+
     public UserViewModel(User user) {
         id = user.getId();
         name = user.getName();

@@ -7,70 +7,42 @@ import com.rental.domain.interfaces.entities.Company;
 import java.util.List;
 import java.util.UUID;
 
-public class CreateCompanyViewModel implements Company {
+public class CreateCompanyViewModel{
 
     //region Private attributes
-    @JsonIgnore
-    private UUID id;
-
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("address")
     private String address;
+    //endregion
 
-    @JsonIgnore
-    private List<String> notifications;
+    //region Constructors
+    public CreateCompanyViewModel() {
+
+    }
     //endregion
 
     //region Getters and setters
 
-    @Override
-    @JsonIgnore
-    public UUID getId() {
-        return id;
-    }
-
-    @Override
-    @JsonIgnore
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    @Override
     @JsonProperty("name")
     public String getName() {
         return name;
     }
 
-    @Override
     @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     @JsonProperty("address")
     public String getAddress() {
         return address;
     }
 
-    @Override
     @JsonProperty("address")
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    @JsonIgnore
-    public List<String> getNotifications() {
-        return notifications;
-    }
-
-    @Override
-    @JsonIgnore
-    public void addNotification(String notification) {
-        notifications.add(notification);
     }
 
     //endregion

@@ -1,10 +1,8 @@
 package com.rental.infrastructure.repositories;
 
 import com.rental.domain.interfaces.entities.User;
-import com.rental.domain.interfaces.entities.Vehicle;
 import com.rental.infrastructure.datamodels.UserDataModel;
 import com.rental.infrastructure.repositories.interfaces.UserRepository;
-import com.rental.infrastructure.repositories.interfaces.VehicleRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -11,7 +11,7 @@ public class VehicleViewModel implements Vehicle {
     //region Private attributes
 
     @JsonProperty("vehicle_id")
-    private UUID Id;
+    private UUID id;
 
     @JsonProperty("licence_plate")
     private String licencePlate;
@@ -28,8 +28,19 @@ public class VehicleViewModel implements Vehicle {
     //endregion
 
     //region Constructors
+    public VehicleViewModel(UUID vehicleId) {
+        id = vehicleId;
+    }
+
+    public VehicleViewModel(String licencePlate, String vehicleName, BigDecimal pricePerDay, int mileage) {
+        this.licencePlate = licencePlate;
+        this.vehicleName = vehicleName;
+        this.pricePerDay = pricePerDay;
+        this.mileage = mileage;
+    }
+
     public VehicleViewModel(Vehicle vehicle) {
-        this.Id = vehicle.getId();
+        this.id = vehicle.getId();
         this.licencePlate = vehicle.getLicencePlate();
         this.vehicleName = vehicle.getVehicleName();
         this.pricePerDay = vehicle.getPricePerDay();
@@ -42,13 +53,13 @@ public class VehicleViewModel implements Vehicle {
     @Override
     @JsonProperty("vehicle_id")
     public UUID getId() {
-        return Id;
+        return id;
     }
 
     @Override
     @JsonProperty("vehicle_id")
     public void setId(UUID Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
     @Override

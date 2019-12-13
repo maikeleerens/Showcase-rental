@@ -3,7 +3,9 @@ package com.rental.infrastructure.datamodels;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Vehicle;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
@@ -29,7 +31,7 @@ public class VehicleDataModel extends BaseEntity implements Vehicle {
     }
 
     public VehicleDataModel(Vehicle vehicle) {
-        setId(vehicle.getId());
+        super.setId(vehicle.getId());
         this.licencePlate = vehicle.getLicencePlate();
         this.vehicleName = vehicle.getVehicleName();
         this.pricePerDay = vehicle.getPricePerDay();

@@ -2,7 +2,6 @@ package com.rental.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
 import com.rental.domain.interfaces.Subject;

@@ -1,5 +1,6 @@
 package com.rental.api.controllers;
 
+import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.vehicle.CreateVehicleViewModel;
 import com.rental.api.viewmodels.vehicle.UpdateVehicleViewModel;
 import com.rental.api.viewmodels.vehicle.VehicleViewModel;
@@ -21,7 +22,7 @@ public class VehicleController {
     @GetMapping
     public ResponseEntity getAllVehicles() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.getAllVehicles());
+            return ResponseEntity.status(HttpStatus.OK).body(ViewModelHelper.toVehicleViewModels(service.getAllVehicles()));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -51,8 +52,7 @@ public class VehicleController {
     @PostMapping("/create")
     public ResponseEntity createVehicle(@RequestBody CreateVehicleViewModel vehicle) {
         try {
-            //if (!vehicle.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vehicle is invalid");
-            var createdVehicle = service.createVehicle(vehicle);
+            var createdVehicle = service.createVehicle(ViewModelHelper.toVehicleViewModel(vehicle));
             if (createdVehicle == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create vehicle");
             return ResponseEntity.status(HttpStatus.OK).body(createdVehicle);
         } catch (Exception ex) {

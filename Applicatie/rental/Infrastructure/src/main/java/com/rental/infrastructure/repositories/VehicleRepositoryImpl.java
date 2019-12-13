@@ -3,11 +3,13 @@ package com.rental.infrastructure.repositories;
 import com.rental.domain.interfaces.entities.Vehicle;
 import com.rental.infrastructure.datamodels.VehicleDataModel;
 import com.rental.infrastructure.repositories.interfaces.VehicleRepository;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

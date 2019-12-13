@@ -3,8 +3,7 @@ package com.rental.api.controllers;
 import com.rental.api.viewmodels.company.CompanyViewModel;
 import com.rental.api.viewmodels.company.CreateCompanyViewModel;
 import com.rental.api.viewmodels.company.UpdateCompanyViewModel;
-import com.rental.api.viewmodels.company.helpers.CompanyViewModelHelper;
-import com.rental.domain.entities.Company;
+import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class CompanyController {
         try {
             var companies = service.getAllCompanies();
             if (companies == null) return ResponseEntity.status(HttpStatus.OK).body("No companies found");
-            return ResponseEntity.status(HttpStatus.OK).body(CompanyViewModelHelper.toCompanyViewModels(companies));
+            return ResponseEntity.status(HttpStatus.OK).body(ViewModelHelper.toCompanyViewModels(companies));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -47,7 +46,7 @@ public class CompanyController {
     public ResponseEntity createCompany(@RequestBody CreateCompanyViewModel company) {
         try {
             //if (!company.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Company is not valid");
-            var createdCompany = service.createCompany(company);
+            var createdCompany = service.createCompany(ViewModelHelper.toCompanyViewModel(company));
             if (createdCompany == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create company");
             return ResponseEntity.status(HttpStatus.OK).body(new CompanyViewModel(createdCompany));
         } catch (Exception ex) {
