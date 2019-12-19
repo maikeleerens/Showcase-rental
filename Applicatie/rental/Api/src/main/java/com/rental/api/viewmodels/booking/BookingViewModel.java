@@ -6,6 +6,7 @@ import com.rental.api.viewmodels.company.CompanyViewModel;
 import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.user.UserViewModel;
 import com.rental.api.viewmodels.vehicle.VehicleViewModel;
+import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Booking;
 import com.rental.domain.interfaces.entities.Company;
 import com.rental.domain.interfaces.entities.User;
@@ -17,12 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class BookingViewModel implements Booking {
+public class BookingViewModel extends BaseEntity implements Booking {
 
     //region Private attributes
-    @JsonProperty("booking_id")
-    private UUID id;
-
     @JsonProperty("booking_number")
     private String bookingNumber;
 
@@ -63,13 +61,13 @@ public class BookingViewModel implements Booking {
     }
 
     public BookingViewModel(UUID id, Date endDate, List<VehicleViewModel> vehicles) {
-        this.id = id;
+        setId(id);
         this.endDate = endDate;
         this.vehicles = vehicles;
     }
 
     public BookingViewModel(Booking booking) {
-        id = booking.getId();
+        setId(booking.getId());
         bookingNumber = booking.getBookingNumber();
         startDate = booking.getStartDate();
         endDate = booking.getEndDate();
@@ -85,13 +83,13 @@ public class BookingViewModel implements Booking {
     @Override
     @JsonProperty("booking_id")
     public UUID getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
     @JsonProperty("booking_id")
     public void setId(UUID id) {
-        id = id;
+        super.setId(id);
     }
 
     @Override

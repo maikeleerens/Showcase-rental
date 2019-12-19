@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Vehicles")
@@ -48,6 +49,16 @@ public class VehicleDataModel extends BaseEntity implements Vehicle {
 
     //region Getters and setters
     @Override
+    public UUID getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(UUID id) {
+        super.setId(id);
+    }
+
+    @Override
     public String getLicencePlate() {
         return licencePlate;
     }
@@ -86,9 +97,5 @@ public class VehicleDataModel extends BaseEntity implements Vehicle {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-    //endregion
-
-    //region Public methods
-
     //endregion
 }

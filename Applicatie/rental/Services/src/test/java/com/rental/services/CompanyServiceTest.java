@@ -31,7 +31,6 @@ public class CompanyServiceTest {
         Company expectedCompany = new CompanyEntity("TestNaam", "TestStraat");
         List<Company> expectedCompanyList = Arrays.asList(expectedCompany);
 
-        //Mockito.when(repository.getAll()).thenReturn(expectedUserList);
         Mockito.doReturn(expectedCompanyList).when(repository).getAll();
 
         //act

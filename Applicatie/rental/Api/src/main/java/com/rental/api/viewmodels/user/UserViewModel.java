@@ -1,17 +1,16 @@
 package com.rental.api.viewmodels.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.User;
 
 import java.util.List;
 import java.util.UUID;
 
-public class UserViewModel implements User {
+public class UserViewModel extends BaseEntity implements User {
 
     //region Private attributes
-    @JsonProperty("user_id")
-    private UUID id;
-
     @JsonProperty("name")
     private String name;
 
@@ -21,13 +20,13 @@ public class UserViewModel implements User {
     @JsonProperty("city")
     private String city;
 
-    @JsonProperty("user_notifications")
+    @JsonIgnore
     private List<String> notifications;
     //endregion
 
     //region Constructors
     public UserViewModel(UUID userId) {
-        id = userId;
+        setId(userId);
     }
 
     public UserViewModel(String name, String address, String city) {
@@ -37,7 +36,7 @@ public class UserViewModel implements User {
     }
 
     public UserViewModel(User user) {
-        id = user.getId();
+        setId(user.getId());
         name = user.getName();
         address = user.getAddress();
         city = user.getCity();
@@ -50,13 +49,13 @@ public class UserViewModel implements User {
     @Override
     @JsonProperty("user_id")
     public UUID getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
     @JsonProperty("user_id")
     public void setId(UUID id) {
-        this.id = id;
+        super.setId(id);
     }
 
     @Override
@@ -96,13 +95,13 @@ public class UserViewModel implements User {
     }
 
     @Override
-    @JsonProperty("user_notifications")
+    @JsonIgnore
     public List<String> getNotifications() {
         return notifications;
     }
 
     @Override
-    @JsonProperty("user_notifications")
+    @JsonIgnore
     public void addNotification(String notification) {
         notifications.add(notification);
     }

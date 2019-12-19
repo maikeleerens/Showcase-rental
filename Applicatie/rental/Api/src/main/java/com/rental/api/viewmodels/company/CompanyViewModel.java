@@ -1,24 +1,23 @@
 package com.rental.api.viewmodels.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Company;
 
 import java.util.List;
 import java.util.UUID;
 
-public class CompanyViewModel implements Company {
+public class CompanyViewModel extends BaseEntity implements Company {
 
     //region Private attributes
-    @JsonProperty("company_id")
-    private UUID id;
-
     @JsonProperty("name")
     private String name;
 
     @JsonProperty("address")
     private String address;
 
-    @JsonProperty("company_notifications")
+    @JsonIgnore
     private List<String> notifications;
     //endregion
 
@@ -29,11 +28,11 @@ public class CompanyViewModel implements Company {
     }
 
     public CompanyViewModel(UUID companyId) {
-        id = companyId;
+        setId(companyId);
     }
 
     public CompanyViewModel(Company company) {
-        id = company.getId();
+        setId(company.getId());
         name = company.getName();
         address = company.getAddress();
         notifications = company.getNotifications();
@@ -45,13 +44,13 @@ public class CompanyViewModel implements Company {
     @Override
     @JsonProperty("company_id")
     public UUID getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
     @JsonProperty("company_id")
     public void setId(UUID id) {
-        this.id = id;
+        super.setId(id);
     }
 
     @Override
@@ -79,13 +78,13 @@ public class CompanyViewModel implements Company {
     }
 
     @Override
-    @JsonProperty("company_notifications")
+    @JsonIgnore
     public List<String> getNotifications() {
         return notifications;
     }
 
     @Override
-    @JsonProperty("company_notifications")
+    @JsonIgnore
     public void addNotification(String notification) {
         notifications.add(notification);
     }

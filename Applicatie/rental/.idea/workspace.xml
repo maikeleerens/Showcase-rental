@@ -76,7 +76,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
-    <configuration name="CompanyServiceTest.getAllCompanies_Returns_List_Of_Companies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CompanyServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Services" />
       <extension name="coverage">
         <pattern>
@@ -86,24 +86,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.rental.services" />
       <option name="MAIN_CLASS_NAME" value="com.rental.services.CompanyServiceTest" />
-      <option name="METHOD_NAME" value="getAllCompanies_Returns_List_Of_Companies" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CompanyServiceTest.getCompanyById_Returns_Company" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Services" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.rental.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.rental.services" />
-      <option name="MAIN_CLASS_NAME" value="com.rental.services.CompanyServiceTest" />
-      <option name="METHOD_NAME" value="getCompanyById_Returns_Company" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -155,6 +138,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VehicleServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Services" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.rental.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.rental.services" />
+      <option name="MAIN_CLASS_NAME" value="com.rental.services.VehicleServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="Api" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.rental.api.Application" />
@@ -164,11 +162,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CompanyServiceTest" />
+        <item itemvalue="JUnit.VehicleServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest" />
         <item itemvalue="JUnit.UserServiceTest.createUser_Returns_User" />
         <item itemvalue="JUnit.CompanyServiceTest.getCompanyById_Returns_Null_On_Non_Existing_Id" />
-        <item itemvalue="JUnit.CompanyServiceTest.getCompanyById_Returns_Company" />
-        <item itemvalue="JUnit.CompanyServiceTest.getAllCompanies_Returns_List_Of_Companies" />
-        <item itemvalue="JUnit.UserServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -218,6 +216,13 @@
       <workItem from="1575904972836" duration="2430000" />
       <workItem from="1575909981746" duration="3829000" />
       <workItem from="1576239342610" duration="5010000" />
+      <workItem from="1576488236380" duration="3785000" />
+      <workItem from="1576504320848" duration="4040000" />
+      <workItem from="1576517320685" duration="4887000" />
+      <workItem from="1576663765031" duration="778000" />
+      <workItem from="1576766114785" duration="120000" />
+      <workItem from="1576766392980" duration="1159000" />
+      <workItem from="1576768534860" duration="1633000" />
     </task>
     <servers />
   </component>
@@ -251,34 +256,24 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
           <line>52</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="22" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Services/src/main/java/com/rental/services/BookingService.java</url>
-          <line>101</line>
-          <option name="timeStamp" value="23" />
+          <line>87</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="25" />
+          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -288,6 +283,7 @@
       </configuration>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((NullPointerException)ex).detailMessage" custom="java.lang.NullPointerException" />
+        <watch expression="((BookingEntity)booking).vehicles" custom="com.rental.services.models.BookingEntity" />
       </configuration>
     </watches-manager>
   </component>

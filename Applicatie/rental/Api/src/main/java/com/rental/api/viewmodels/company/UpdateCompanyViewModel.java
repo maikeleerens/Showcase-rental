@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class UpdateCompanyViewModel implements Company {
+
+    //region Private attributes
     @JsonProperty("company_id")
     private UUID id;
 

@@ -114,9 +114,9 @@ public class BookingController {
     @GetMapping("/notify")
     public ResponseEntity notifyBookingObservers() {
         try {
-            var bookings = service.getAllExpiredAndUnReturnedBookings();
-            if (bookings == null)
-                return ResponseEntity.status(HttpStatus.OK).body("No notifications created");
+            var bookingsToNotify = service.notifyAllExpiredAndUnreturnedBookings();
+            if (!bookingsToNotify)
+                return ResponseEntity.status(HttpStatus.OK).body("No notifications send");
             return ResponseEntity.status(HttpStatus.OK).body("Notifications send!");
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

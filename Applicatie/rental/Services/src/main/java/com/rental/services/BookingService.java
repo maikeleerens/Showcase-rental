@@ -34,26 +34,16 @@ public class BookingService {
         if (bookingList.size() < 1) {
             return null;
         }
-        for (var booking:
-             bookingList) {
-            attachObservers(booking);
-        }
         return bookingList;
     }
 
     public Booking getBookingById(UUID id) throws Exception {
         var booking = repository.getById(id).orElse(null);
-        if (booking != null) {
-            attachObservers(booking);
-        }
         return booking;
     }
 
     public Booking getBookingByBookingNumber(String bookingNumber) throws Exception {
         var booking = repository.getByBookingNumber(bookingNumber).orElse(null);
-        if (booking != null) {
-            attachObservers(booking);
-        }
         return booking;
     }
 
@@ -91,32 +81,27 @@ public class BookingService {
         if (bookingList.size() < 1) {
             return null;
         }
-        for (var booking:
-                bookingList) {
-            attachObservers(booking);
-        }
         return bookingList;
     }
 
-    public List<? extends Booking> getAllExpiredAndUnReturnedBookings() throws Exception {
+    public boolean notifyAllExpiredAndUnreturnedBookings() throws Exception {
         var bookingList = repository.getAllEndDatePassedAndUnReturned(new Date());
         if (bookingList.size() < 1) {
-            return null;
+            return false;
         }
         for (var booking:
                 bookingList) {
             var bookingEntity = new BookingEntity(booking);
             attachObservers(bookingEntity);
             bookingEntity.Notify();
-            repository.save(bookingEntity);
+            repository.update(bookingEntity);
         }
-        return bookingList;
+        return true;
     }
 
-    public void attachObservers(Booking booking) throws Exception {
-        var bookingEntity = new BookingEntity(booking);
-        bookingEntity.Attach(bookingEntity.getUser());
-        bookingEntity.Attach(bookingEntity.getCompany());
+    public void attachObservers(BookingEntity booking) throws Exception {
+        booking.Attach(booking.getUser());
+        booking.Attach(booking.getCompany());
     }
 
     public BigDecimal calculateTotalBookingPrice(BookingEntity booking) throws Exception {

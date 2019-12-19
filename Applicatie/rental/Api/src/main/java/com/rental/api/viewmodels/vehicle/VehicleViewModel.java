@@ -1,18 +1,15 @@
 package com.rental.api.viewmodels.vehicle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Vehicle;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class VehicleViewModel implements Vehicle {
+public class VehicleViewModel extends BaseEntity implements Vehicle {
 
     //region Private attributes
-
-    @JsonProperty("vehicle_id")
-    private UUID id;
-
     @JsonProperty("licence_plate")
     private String licencePlate;
 
@@ -29,7 +26,7 @@ public class VehicleViewModel implements Vehicle {
 
     //region Constructors
     public VehicleViewModel(UUID vehicleId) {
-        id = vehicleId;
+        setId(vehicleId);
     }
 
     public VehicleViewModel(String licencePlate, String vehicleName, BigDecimal pricePerDay, int mileage) {
@@ -40,7 +37,7 @@ public class VehicleViewModel implements Vehicle {
     }
 
     public VehicleViewModel(Vehicle vehicle) {
-        this.id = vehicle.getId();
+        setId(vehicle.getId());
         this.licencePlate = vehicle.getLicencePlate();
         this.vehicleName = vehicle.getVehicleName();
         this.pricePerDay = vehicle.getPricePerDay();
@@ -53,13 +50,13 @@ public class VehicleViewModel implements Vehicle {
     @Override
     @JsonProperty("vehicle_id")
     public UUID getId() {
-        return id;
+        return super.getId();
     }
 
     @Override
     @JsonProperty("vehicle_id")
     public void setId(UUID Id) {
-        this.id = Id;
+        super.setId(Id);
     }
 
     @Override
@@ -109,10 +106,6 @@ public class VehicleViewModel implements Vehicle {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-
-    //endregion
-
-    //region Public methods
 
     //endregion
 
