@@ -2,7 +2,6 @@ package com.rental.api.controllers;
 
 import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.user.CreateUserViewModel;
-import com.rental.api.viewmodels.user.UpdateUserViewModel;
 import com.rental.api.viewmodels.user.UserViewModel;
 import com.rental.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

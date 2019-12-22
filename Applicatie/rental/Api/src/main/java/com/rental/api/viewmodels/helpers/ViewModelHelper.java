@@ -56,9 +56,9 @@ public class ViewModelHelper {
         return new CompanyViewModel(model.getName(), model.getAddress());
     }
 
-    public static UserViewModel toUserViewModel(CreateUserViewModel model) {
-        return new UserViewModel(model.getName(), model.getAddress(), model.getCity());
-    }
+//    public static UserViewModel toUserViewModel(CreateUserViewModel model) {
+//        return new UserViewModel(model.getName(), model.getAddress(), model.getCity());
+//    }
 
     public static BookingViewModel toBookingViewModel(CreateBookingViewModel model) {
         List<VehicleViewModel> vehicleList = new ArrayList<>();

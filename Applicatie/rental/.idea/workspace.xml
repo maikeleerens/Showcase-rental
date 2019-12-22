@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecf89c77-1e47-4500-a993-e7377532bc53" name="Default Changelist" comment="" />
+    <list default="true" id="ecf89c77-1e47-4500-a993-e7377532bc53" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/config/ResourceServerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/oauth2/OAuth2ServerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/service/DefaultUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/service/DefaultUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/helpers/ViewModelHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/helpers/ViewModelHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/user/UpdateUserViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/user/UpdateUserViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/user/UserViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/java/com/rental/api/viewmodels/user/UserViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Api/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/Api/target/classes/com/rental/api/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/config/ResourceServerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/Api/target/classes/com/rental/api/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/controllers/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Api/target/classes/com/rental/api/controllers/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/oauth2/OAuth2ServerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/target/classes/com/rental/api/service/DefaultUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Api/target/classes/com/rental/api/service/DefaultUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/entities/Booking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/entities/Company.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/entities/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/entities/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/interfaces/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/src/main/java/com/rental/domain/interfaces/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Domain/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/datamodels/UserDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/datamodels/UserDataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/interfaces/CompanyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/interfaces/CompanyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/Services.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/com/rental/services/models/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/com/rental/services/models/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Services/target/classes/module-info.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +78,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1TeCGQX6p9oNbul7GJGAUB34Mw7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -224,6 +263,7 @@
       <workItem from="1576766392980" duration="1159000" />
       <workItem from="1576768534860" duration="2268000" />
       <workItem from="1576828190489" duration="13416000" />
+      <workItem from="1576945675224" duration="9787000" />
     </task>
     <servers />
   </component>
@@ -272,9 +312,9 @@
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Services/src/test/java/com/rental/services/UserServiceTest.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/Api/src/main/java/com/rental/api/filters/JwtRequestFilter.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -8,6 +8,18 @@ public interface User {
 
     void setId(UUID id);
 
+    String getEmail();
+
+    void setEmail(String email);
+
+    String getPassword();
+
+    void setPassword(String password);
+
+    List<? extends Role> getRoles();
+
+    void setRoles(List<? extends Role> roles);
+
     String getName();
 
     void setName(String name);

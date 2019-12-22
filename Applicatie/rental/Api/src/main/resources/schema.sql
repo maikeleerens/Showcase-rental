@@ -14,10 +14,18 @@ address varchar not null
 
 CREATE table Users (
 id UUID primary key,
+email varchar NOT NULL UNIQUE,
+password varchar NOT NULL,
+role_id UUID NOT NULL,
 name varchar NOT NULL,
 address varchar not null,
 city varchar not null
 );
+
+CREATE table Roles (
+id UUID primary key,
+name varchar NOT NULL
+)
 
 CREATE table Vehicles (
 id UUID primary key,
@@ -47,6 +55,12 @@ vehicles_id UUID,
 FOREIGN KEY(booking_id) REFERENCES Bookings(id),
 FOREIGN KEY(vehicles_id) REFERENCES Vehicles(id)
 );
+
+CREATE table User_Roles (
+id UUID DEFAULT RANDOM_UID() PRIMARY KEY,
+user_id UUID,
+role_id UUID
+)
 
 CREATE table User_Notifications (
 id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,

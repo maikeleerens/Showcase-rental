@@ -1,7 +1,9 @@
 package com.rental.services;
 
+import com.rental.domain.interfaces.entities.Role;
 import com.rental.domain.interfaces.entities.User;
 import com.rental.infrastructure.repositories.UserRepositoryImpl;
+import com.rental.services.models.RoleEntity;
 import com.rental.services.models.UserEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,10 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +28,9 @@ public class UserServiceTest {
     @Test
     public void getAllUsers_Returns_List_Of_Users() throws Exception {
         //arrange
-        User expectedUser = new UserEntity("TestNaam", "TestStraat", "TestStad");
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User expectedUser = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
         List<User> expectedUserList = Arrays.asList(expectedUser);
 
         //Mockito.when(repository.getAll()).thenReturn(expectedUserList);
@@ -45,7 +46,9 @@ public class UserServiceTest {
     @Test
     public void getUserById_Returns_User() throws Exception {
         //arrange
-        User expectedUser = new UserEntity("TestNaam", "TestStraat", "TestStad");
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User expectedUser = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
         expectedUser.setId(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"));
 
         Mockito.when(repository.getById(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"))).thenReturn(Optional.of(expectedUser));
@@ -60,10 +63,12 @@ public class UserServiceTest {
     @Test
     public void getUserById_Returns_Null_On_Non_Existing_Id() throws Exception {
         //arrange
-        User user = new UserEntity("TestNaam", "TestStraat", "TestStad");
-        user.setId(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"));
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User expectedUser = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
+        expectedUser.setId(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"));
 
-        Mockito.when(repository.getById(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"))).thenReturn(Optional.of(user));
+        Mockito.when(repository.getById(UUID.fromString("56f3ad2f-8f6c-4f54-b1d2-54a544d71492"))).thenReturn(Optional.of(expectedUser));
 
         //act
         User actualUser = service.getUserById(UUID.fromString("b551d47f-2b7d-4e49-91c2-b68541b4fe5c"));
@@ -75,7 +80,9 @@ public class UserServiceTest {
     @Test
     public void getUserByName_Returns_List_Of_Users() throws Exception {
         //arrange
-        User expectedUser = new UserEntity("TestNaam", "TestStraat", "TestStad");
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User expectedUser = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
         List<User> expectedUserList = Arrays.asList(expectedUser);
 
         Mockito.doReturn(expectedUserList).when(repository).getByName("TestNaam");
@@ -90,8 +97,10 @@ public class UserServiceTest {
     @Test
     public void getUserByName_Returns_Null_On_Non_Existing_Name() throws Exception {
         //arrange
-        User user = new UserEntity("TestNaam", "TestStraat", "TestStad");
-        List<User> expectedUserList = Arrays.asList(user);
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User expectedUser = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
+        List<User> expectedUserList = Arrays.asList(expectedUser);
 
         Mockito.doReturn(expectedUserList).when(repository).getByName("TestNaam");
 
@@ -105,7 +114,9 @@ public class UserServiceTest {
     @Test
     public void createUser_Returns_User() throws Exception {
         //arrange
-        User userToCreate = new UserEntity("TestNaam", "TestStraat", "TestStad");
+        List<RoleEntity> roles = new ArrayList<>();
+        roles.add(new RoleEntity("ADMIN"));
+        User userToCreate = new UserEntity("test@test,com", "Test123!", roles, "TestNaam", "TestStraat", "TestStad");
 
         Mockito.when(repository.save(userToCreate)).thenReturn(Optional.of(userToCreate));
 
@@ -119,7 +130,7 @@ public class UserServiceTest {
     @Test
     public void createUser_Returns_Null_On_Invalid_User() throws Exception {
         //arrange
-        User userToCreate = new UserEntity("", "", "");
+        User userToCreate = new UserEntity("", "", new ArrayList<RoleEntity>(), "", "", "");
 
         Mockito.when(repository.save(userToCreate)).thenReturn(Optional.of(userToCreate));
 

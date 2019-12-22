@@ -2,12 +2,19 @@ package com.rental.services.models;
 
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.Observer;
+import com.rental.domain.interfaces.entities.Role;
 import com.rental.domain.interfaces.entities.User;
 
 import java.util.List;
 
 public class UserEntity extends BaseEntity implements User, Observer {
     //region Private attributes
+    private String email;
+
+    private String password;
+
+    private List<? extends Role> roles;
+
     private String name;
 
     private String address;
@@ -23,13 +30,19 @@ public class UserEntity extends BaseEntity implements User, Observer {
 
     public UserEntity(User user) {
         setId(user.getId());
+        email = user.getEmail();
+        password = user.getPassword();
+        roles = user.getRoles();
         name = user.getName();
         address = user.getAddress();
         city = user.getCity();
         notifications = user.getNotifications();
     }
 
-    public UserEntity(String name, String address, String city) {
+    public UserEntity(String email, String password, List<? extends Role> roles, String name, String address, String city) {
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
         this.name = name;
         this.address = address;
         this.city = city;
@@ -37,6 +50,37 @@ public class UserEntity extends BaseEntity implements User, Observer {
     //endregion
 
     //region Getters and setters
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public List<? extends Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public void setRoles(List<? extends Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String getName() {
         return name;

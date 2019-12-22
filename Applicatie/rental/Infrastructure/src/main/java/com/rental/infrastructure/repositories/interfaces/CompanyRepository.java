@@ -9,6 +9,5 @@ import java.util.UUID;
 public interface CompanyRepository extends BaseRepository<Company> {
     List<? extends Company> getByName(String name);
 
-    //@Query(value = "SELECT notification FROM Company_Notifications WHERE company_id = :id", nativeQuery = true)
     List<String> getAllCompanyNotifications(UUID id);
 }

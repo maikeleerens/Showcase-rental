@@ -3,6 +3,7 @@ package com.rental.api.viewmodels.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rental.domain.entities.base.BaseEntity;
+import com.rental.domain.interfaces.entities.Role;
 import com.rental.domain.interfaces.entities.User;
 
 import java.util.List;
@@ -11,6 +12,12 @@ import java.util.UUID;
 public class UserViewModel extends BaseEntity implements User {
 
     //region Private attributes
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("roles")
+    private List<? extends Role> roles;
+
     @JsonProperty("name")
     private String name;
 
@@ -29,7 +36,9 @@ public class UserViewModel extends BaseEntity implements User {
         setId(userId);
     }
 
-    public UserViewModel(String name, String address, String city) {
+    public UserViewModel(String email, List<? extends Role> roles, String name, String address, String city) {
+        this.email = email;
+        this.roles = roles;
         this.name = name;
         this.address = address;
         this.city = city;
@@ -37,6 +46,8 @@ public class UserViewModel extends BaseEntity implements User {
 
     public UserViewModel(User user) {
         setId(user.getId());
+        email = user.getEmail();
+        roles = user.getRoles();
         name = user.getName();
         address = user.getAddress();
         city = user.getCity();
@@ -45,6 +56,39 @@ public class UserViewModel extends BaseEntity implements User {
     //endregion
 
     //region Getters and setters
+
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public List<? extends Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public void setRoles(List<? extends Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    @JsonIgnore
+    public void setPassword(String password) {
+
+    }
 
     @Override
     @JsonProperty("user_id")
