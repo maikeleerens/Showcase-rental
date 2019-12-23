@@ -19,7 +19,6 @@ public class UserRepositoryImpl implements UserRepository {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     public List<? extends User> getAll() {
         try {
@@ -77,6 +76,18 @@ public class UserRepositoryImpl implements UserRepository {
             return query.getResultList();
         } catch (NoResultException ex) {
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        try {
+            String sql = "SELECT u FROM UserDataModel u WHERE email = :email";
+            final TypedQuery<UserDataModel> query = em.createQuery(sql, UserDataModel.class);
+            query.setParameter("email", email);
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException ex) {
+            return Optional.empty();
         }
     }
 

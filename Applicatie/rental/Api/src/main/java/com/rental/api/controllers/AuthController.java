@@ -31,15 +31,15 @@ public class AuthController {
     private JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity authenticate(@RequestBody AuthRequestViewModel authrequest) {
+    public ResponseEntity authenticate(@RequestBody AuthRequestViewModel authRequest) {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authrequest.getUsername(), authrequest.getPassword()));
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authrequest.getUsername());
+                .loadUserByUsername(authRequest.getUsername());
 
         final String jwtBearerToken = jwtService.generateJwtToken(userDetails);
 

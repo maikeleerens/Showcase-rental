@@ -2,6 +2,8 @@ package com.rental.api.viewmodels.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.rental.api.viewmodels.helpers.ViewModelHelper;
+import com.rental.api.viewmodels.role.RoleViewModel;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Role;
 import com.rental.domain.interfaces.entities.User;
@@ -15,8 +17,11 @@ public class UserViewModel extends BaseEntity implements User {
     @JsonProperty("email")
     private String email;
 
+    @JsonIgnore
+    private String password;
+
     @JsonProperty("roles")
-    private List<? extends Role> roles;
+    private List<RoleViewModel> roles;
 
     @JsonProperty("name")
     private String name;
@@ -32,12 +37,18 @@ public class UserViewModel extends BaseEntity implements User {
     //endregion
 
     //region Constructors
+
+
+    public UserViewModel() {
+    }
+
     public UserViewModel(UUID userId) {
         setId(userId);
     }
 
-    public UserViewModel(String email, List<? extends Role> roles, String name, String address, String city) {
+    public UserViewModel(String email, String password, List<RoleViewModel> roles, String name, String address, String city) {
         this.email = email;
+        this.password = password;
         this.roles = roles;
         this.name = name;
         this.address = address;
@@ -47,7 +58,8 @@ public class UserViewModel extends BaseEntity implements User {
     public UserViewModel(User user) {
         setId(user.getId());
         email = user.getEmail();
-        roles = user.getRoles();
+        password = user.getPassword();
+        roles = ViewModelHelper.toRoleViewModels(user.getRoles());
         name = user.getName();
         address = user.getAddress();
         city = user.getCity();
@@ -75,19 +87,19 @@ public class UserViewModel extends BaseEntity implements User {
 
     @Override
     public void setRoles(List<? extends Role> roles) {
-        this.roles = roles;
+        this.roles = ViewModelHelper.toRoleViewModels(roles);
     }
 
     @Override
     @JsonIgnore
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     @JsonIgnore
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     @Override

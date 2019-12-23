@@ -18,8 +18,8 @@ public class UserDataModel extends BaseEntity implements User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany()
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @CollectionTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"))
     @ElementCollection(targetClass = RoleDataModel.class)
     private List<? extends Role> roles;
 

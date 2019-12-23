@@ -40,6 +40,10 @@ public class UserService {
         return userList;
     }
 
+    public User getUserByEmail(String email) throws Exception {
+        return repository.getByEmail(email).orElse(null);
+    }
+
     public User createUser(User user) throws Exception {
         var userEntity = new UserEntity(user);
         if (userEntity.isValid()) {

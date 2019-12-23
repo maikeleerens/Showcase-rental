@@ -5,13 +5,13 @@ import com.rental.api.viewmodels.booking.CreateBookingViewModel;
 import com.rental.api.viewmodels.booking.UpdateBookingViewModel;
 import com.rental.api.viewmodels.company.CompanyViewModel;
 import com.rental.api.viewmodels.company.CreateCompanyViewModel;
+import com.rental.api.viewmodels.role.RoleViewModel;
 import com.rental.api.viewmodels.user.CreateUserViewModel;
+import com.rental.api.viewmodels.user.UpdateUserViewModel;
 import com.rental.api.viewmodels.user.UserViewModel;
 import com.rental.api.viewmodels.vehicle.CreateVehicleViewModel;
 import com.rental.api.viewmodels.vehicle.VehicleViewModel;
-import com.rental.domain.interfaces.entities.Booking;
-import com.rental.domain.interfaces.entities.Company;
-import com.rental.domain.interfaces.entities.Vehicle;
+import com.rental.domain.interfaces.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +48,16 @@ public class ViewModelHelper {
         return returnBookingList;
     }
 
+    public static List<RoleViewModel> toRoleViewModels(List<? extends Role> roles) {
+        List<RoleViewModel> returnRoleList = new ArrayList<>();
+
+        for (var role:
+             roles) {
+            returnRoleList.add(new RoleViewModel(role));
+        }
+        return returnRoleList;
+    }
+
     public static VehicleViewModel toVehicleViewModel(CreateVehicleViewModel model) {
         return new VehicleViewModel(model.getLicencePlate(), model.getVehicleName(), model.getPricePerDay(), model.getMileage());
     }
@@ -56,9 +66,20 @@ public class ViewModelHelper {
         return new CompanyViewModel(model.getName(), model.getAddress());
     }
 
-//    public static UserViewModel toUserViewModel(CreateUserViewModel model) {
-//        return new UserViewModel(model.getName(), model.getAddress(), model.getCity());
-//    }
+    public static UserViewModel toUserViewModel(CreateUserViewModel model) {
+        List<RoleViewModel> roleList = new ArrayList<>();
+
+        for (var roleId:
+             model.getRoleIds()) {
+            roleList.add(new RoleViewModel(roleId));
+        }
+
+        return new UserViewModel(model.getEmail(), model.getPassword(), roleList, model.getName(), model.getAddress(), model.getCity());
+    }
+
+    public static UserViewModel toUserViewModel(UpdateUserViewModel model) {
+        return new UserViewModel(model.getEmail(), model.getPassword(), null, model.getName(), model.getAddress(), model.getCity());
+    }
 
     public static BookingViewModel toBookingViewModel(CreateBookingViewModel model) {
         List<VehicleViewModel> vehicleList = new ArrayList<>();

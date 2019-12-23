@@ -2,6 +2,7 @@ package com.rental.api.controllers;
 
 import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.user.CreateUserViewModel;
+import com.rental.api.viewmodels.user.UpdateUserViewModel;
 import com.rental.api.viewmodels.user.UserViewModel;
 import com.rental.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class UserController {
         try {
             //if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
             //if (!user.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User is not valid");
-            var updatedUser = service.updateUser(user);
+            var updatedUser = service.updateUser(ViewModelHelper.toUserViewModel(user));
             if (updatedUser == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update user");
             return ResponseEntity.status(HttpStatus.OK).body(new UserViewModel(updatedUser));
         } catch (Exception ex) {

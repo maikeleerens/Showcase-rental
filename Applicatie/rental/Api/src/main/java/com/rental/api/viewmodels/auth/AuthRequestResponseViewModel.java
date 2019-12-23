@@ -1,8 +1,11 @@
 package com.rental.api.viewmodels.auth;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AuthRequestResponseViewModel {
 
     //region Private attributes
+    @JsonProperty("token")
     private String bearerToken;
     //endregion
 
@@ -16,6 +19,7 @@ public class AuthRequestResponseViewModel {
 
     //region Getters and setters
 
+    @JsonProperty("token")
     public String getBearerToken() {
         return bearerToken;
     }

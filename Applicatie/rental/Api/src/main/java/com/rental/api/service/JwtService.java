@@ -29,7 +29,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    private boolean istokenExpired(String token) {
+    private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
@@ -46,6 +46,6 @@ public class JwtService {
 
     public boolean validateJwtToken(String token, UserDetails details) {
         final String username = extractUserName(token);
-        return (username.equals(details.getUsername()) && !istokenExpired(token));
+        return (username.equals(details.getUsername()) && !isTokenExpired(token));
     }
 }
