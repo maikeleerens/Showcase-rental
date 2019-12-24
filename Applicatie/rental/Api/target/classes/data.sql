@@ -4,13 +4,13 @@ INSERT INTO ROLES VALUES ('a0c03879-5af3-488a-88df-54f29a6d0b8d', 'ADMIN');
 INSERT INTO ROLES VALUES ('3e93b6b7-bb8e-41b5-872c-849e68770b02', 'EMPLOYEE');
 INSERT INTO ROLES VALUES ('f9262185-2dba-416b-ba2e-93a790a2d5c4', 'CUSTOMER');
 
-INSERT INTO USERS VALUES ('51069215-566f-41b5-a281-0d5c18e1fcc8', 'maikel.eerens@gmail.com', 'Test123!', 'Maikel Eerens', 'Koning Leopoldlaan 54B', 'Lommel');
-INSERT INTO USERS VALUES ('8ba2f9eb-104f-4bb3-ad10-62f7024b6163', 'JanKlaas@test.com', 'Test123!', 'Jan Klaas', 'JanKlaasstraat 69', 'ZekerNietBoxtel');
-INSERT INTO USERS VALUES ('55162f80-ad51-405a-a081-eddcd1738dad', 'Henk@testcustomer.com', 'Test123!', 'Henk', 'Teststraat 69', 'TestGat');
+INSERT INTO USERS VALUES ('51069215-566f-41b5-a281-0d5c18e1fcc8', 'maikel.eerens@gmail.com', '$2a$10$lk5fTyCawQcVTxEO3l8k4OI3qAGhuQf8L/lAo1FaEBMDlacgNCBx.', 'Maikel Eerens', 'Koning Leopoldlaan 54B', 'Lommel');
+INSERT INTO USERS VALUES ('8ba2f9eb-104f-4bb3-ad10-62f7024b6163', 'JanKlaas@test.com', '$2a$10$lk5fTyCawQcVTxEO3l8k4OI3qAGhuQf8L/lAo1FaEBMDlacgNCBx.', 'Jan Klaas', 'JanKlaasstraat 69', 'ZekerNietBoxtel');
+INSERT INTO USERS VALUES ('55162f80-ad51-405a-a081-eddcd1738dad', 'Henk@testcustomer.com', '$2a$10$lk5fTyCawQcVTxEO3l8k4OI3qAGhuQf8L/lAo1FaEBMDlacgNCBx.!', 'Henk', 'Teststraat 69', 'TestGat');
 
-INSERT INTO USER_ROLES VALUES ('a808ad00-e73a-480c-bd82-8f3fbdc0d61b', '51069215-566f-41b5-a281-0d5c18e1fcc8', 'a0c03879-5af3-488a-88df-54f29a6d0b8d');
-INSERT INTO USER_ROLES VALUES ('d9a14748-6d8b-4d85-a7e4-51476861941d', '8ba2f9eb-104f-4bb3-ad10-62f7024b6163', '3e93b6b7-bb8e-41b5-872c-849e68770b02');
-INSERT INTO USER_ROLES VALUES ('635e3193-4581-4e53-8198-7bc3f2bb1f10', '55162f80-ad51-405a-a081-eddcd1738dad', 'f9262185-2dba-416b-ba2e-93a790a2d5c4');
+INSERT INTO USERS_ROLES VALUES ('a808ad00-e73a-480c-bd82-8f3fbdc0d61b', '51069215-566f-41b5-a281-0d5c18e1fcc8', 'a0c03879-5af3-488a-88df-54f29a6d0b8d');
+INSERT INTO USERS_ROLES VALUES ('d9a14748-6d8b-4d85-a7e4-51476861941d', '8ba2f9eb-104f-4bb3-ad10-62f7024b6163', '3e93b6b7-bb8e-41b5-872c-849e68770b02');
+INSERT INTO USERS_ROLES VALUES ('635e3193-4581-4e53-8198-7bc3f2bb1f10', '55162f80-ad51-405a-a081-eddcd1738dad', 'f9262185-2dba-416b-ba2e-93a790a2d5c4');
 
 INSERT INTO VEHICLES VALUES ( 'f0d66c7c-8ed3-44ff-aad6-0a747d0bf2e1', '36-RN-GF', 'Fiat Stilo 2.4', 25.00, 170000 );
 INSERT INTO VEHICLES VALUES ( '820960f9-e0fa-4d9a-ac32-affcd9dc3733', '05-GG-RH', 'Ford Fiesta 1.2', 18.00, 65000 );

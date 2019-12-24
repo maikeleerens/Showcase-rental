@@ -17,20 +17,21 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BookingService {
 
-    @Autowired
-    BookingRepositoryImpl repository;
+    private BookingRepositoryImpl _repository;
+    private CompanyService _companyService;
+    private UserService _userService;
+    private VehicleService _vehicleService;
 
     @Autowired
-    CompanyService companyService;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    VehicleService vehicleService;
+    public BookingService(BookingRepositoryImpl repository, CompanyService companyService, UserService userService, VehicleService vehicleService) {
+        _repository = repository;
+        _companyService = companyService;
+        _userService = userService;
+        _vehicleService = vehicleService;
+    }
 
     public List<? extends Booking> getAllBookings() throws Exception {
-        var bookingList = repository.getAll();
+        var bookingList = _repository.getAll();
         if (bookingList.size() < 1) {
             return null;
         }
@@ -38,12 +39,12 @@ public class BookingService {
     }
 
     public Booking getBookingById(UUID id) throws Exception {
-        var booking = repository.getById(id).orElse(null);
+        var booking = _repository.getById(id).orElse(null);
         return booking;
     }
 
     public Booking getBookingByBookingNumber(String bookingNumber) throws Exception {
-        var booking = repository.getByBookingNumber(bookingNumber).orElse(null);
+        var booking = _repository.getByBookingNumber(bookingNumber).orElse(null);
         return booking;
     }
 
@@ -52,12 +53,12 @@ public class BookingService {
         List<Vehicle> vehicleList = new ArrayList<>();
         for (var vehicle:
              booking.getVehicles()) {
-            vehicleList.add(vehicleService.getVehicleById(vehicle.getId()));
+            vehicleList.add(_vehicleService.getVehicleById(vehicle.getId()));
         }
         bookingEntity.setVehicles(vehicleList);
         bookingEntity.setTotalPrice(calculateTotalBookingPrice(bookingEntity));
         if (bookingEntity.isValid()) {
-            repository.save(bookingEntity);
+            _repository.save(bookingEntity);
             attachObservers(bookingEntity);
             return bookingEntity;
         } else {
@@ -68,7 +69,7 @@ public class BookingService {
     public Booking updateBooking(Booking booking) throws Exception {
         var bookingEntity = new BookingEntity(booking);
         if (bookingEntity.isValid()) {
-            repository.update(bookingEntity);
+            _repository.update(bookingEntity);
             attachObservers(bookingEntity);
             return bookingEntity;
         } else {
@@ -77,7 +78,7 @@ public class BookingService {
     }
 
     public List<? extends Booking> getAllUnReturnedBookings() throws Exception {
-        var bookingList = repository.getAllUnreturnedBookings();
+        var bookingList = _repository.getAllUnreturnedBookings();
         if (bookingList.size() < 1) {
             return null;
         }
@@ -85,7 +86,7 @@ public class BookingService {
     }
 
     public boolean notifyAllExpiredAndUnreturnedBookings() throws Exception {
-        var bookingList = repository.getAllEndDatePassedAndUnReturned(new Date());
+        var bookingList = _repository.getAllEndDatePassedAndUnReturned(new Date());
         if (bookingList.size() < 1) {
             return false;
         }
@@ -94,7 +95,7 @@ public class BookingService {
             var bookingEntity = new BookingEntity(booking);
             attachObservers(bookingEntity);
             bookingEntity.Notify();
-            repository.update(bookingEntity);
+            _repository.update(bookingEntity);
         }
         return true;
     }

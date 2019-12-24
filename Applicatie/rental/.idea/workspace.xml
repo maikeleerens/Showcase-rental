@@ -264,6 +264,8 @@
       <workItem from="1576768534860" duration="2268000" />
       <workItem from="1576828190489" duration="13416000" />
       <workItem from="1576945675224" duration="9787000" />
+      <workItem from="1577117693703" duration="135000" />
+      <workItem from="1577175160333" duration="17551000" />
     </task>
     <servers />
   </component>
@@ -298,23 +300,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
           <line>52</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Services/src/main/java/com/rental/services/BookingService.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Api/src/main/java/com/rental/api/filters/JwtRequestFilter.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/UserRepositoryImpl.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

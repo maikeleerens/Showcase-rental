@@ -48,6 +48,17 @@ public class ViewModelHelper {
         return returnBookingList;
     }
 
+    public static List<UserViewModel> toUserViewModels(List<? extends User> users) {
+        List<UserViewModel> returnUserList = new ArrayList<>();
+
+        for (var user:
+             users) {
+            returnUserList.add(new UserViewModel(user));
+        }
+
+        return returnUserList;
+    }
+
     public static List<RoleViewModel> toRoleViewModels(List<? extends Role> roles) {
         List<RoleViewModel> returnRoleList = new ArrayList<>();
 

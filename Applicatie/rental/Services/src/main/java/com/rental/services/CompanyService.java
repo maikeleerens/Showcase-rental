@@ -17,11 +17,15 @@ import java.util.UUID;
 @Service
 public class CompanyService {
 
+    private CompanyRepositoryImpl _repository;
+
     @Autowired
-    CompanyRepositoryImpl repository;
+    public CompanyService(CompanyRepositoryImpl repository) {
+        _repository = repository;
+    }
 
     public List<? extends Company> getAllCompanies() throws Exception {
-        var companyList = repository.getAll();
+        var companyList = _repository.getAll();
         if (companyList.size() < 1) {
             return null;
         }
@@ -29,13 +33,13 @@ public class CompanyService {
     }
 
     public Company getCompanyById(UUID id) throws Exception {
-        return repository.getById(id).orElse(null);
+        return _repository.getById(id).orElse(null);
     }
 
     public Company createCompany(Company company) throws Exception {
         var companyEntity = new CompanyEntity(company);
         if (companyEntity.isValid()) {
-            var createdCompany = repository.save(companyEntity);
+            var createdCompany = _repository.save(companyEntity);
             return createdCompany.orElse(null);
         } else {
             return null;
@@ -45,7 +49,7 @@ public class CompanyService {
     public Company updateCompany(Company company) throws Exception {
         var companyEntity = new CompanyEntity(company);
         if (companyEntity.isValid()) {
-            var updatedCompany = repository.update(companyEntity);
+            var updatedCompany = _repository.update(companyEntity);
             return updatedCompany.orElse(null);
         } else {
             return null;
@@ -53,7 +57,7 @@ public class CompanyService {
     }
 
     public List<String> getCompanyNotifications(UUID id) throws Exception {
-        var notifications = repository.getAllCompanyNotifications(id);
+        var notifications = _repository.getAllCompanyNotifications(id);
         if (notifications.size() < 1) {
             return null;
         }

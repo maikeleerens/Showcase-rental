@@ -5,6 +5,8 @@ Drop table if Exists Bookings;
 Drop table if Exists Bookings_Vehicles;
 Drop table if Exists User_Notifications;
 Drop table if Exists Company_Notifications;
+Drop table if Exists Roles;
+Drop table if Exists Users_Roles;
 
 CREATE table Companies (
 id UUID primary key,
@@ -16,7 +18,6 @@ CREATE table Users (
 id UUID primary key,
 email varchar NOT NULL UNIQUE,
 password varchar NOT NULL,
-role_id UUID NOT NULL,
 name varchar NOT NULL,
 address varchar not null,
 city varchar not null
@@ -24,8 +25,8 @@ city varchar not null
 
 CREATE table Roles (
 id UUID primary key,
-name varchar NOT NULL
-)
+name varchar NOT NULL UNIQUE
+);
 
 CREATE table Vehicles (
 id UUID primary key,
@@ -56,11 +57,13 @@ FOREIGN KEY(booking_id) REFERENCES Bookings(id),
 FOREIGN KEY(vehicles_id) REFERENCES Vehicles(id)
 );
 
-CREATE table User_Roles (
-id UUID DEFAULT RANDOM_UID() PRIMARY KEY,
+CREATE table Users_Roles (
+id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,
 user_id UUID,
-role_id UUID
-)
+roles_id UUID,
+FOREIGN KEY(user_id) REFERENCES Users(id),
+FOREIGN KEY(roles_id) REFERENCES Roles(id)
+);
 
 CREATE table User_Notifications (
 id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,

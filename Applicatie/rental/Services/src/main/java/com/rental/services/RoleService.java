@@ -12,11 +12,15 @@ import java.util.UUID;
 @Service
 public class RoleService {
 
+    private RoleRepositoryImpl _repository;
+
     @Autowired
-    private RoleRepositoryImpl repository;
+    public RoleService(RoleRepositoryImpl repository) {
+        _repository = repository;
+    }
 
     public List<? extends Role> getAllRoles() throws Exception {
-        var roleList = repository.getAll();
+        var roleList = _repository.getAll();
         if (roleList.size() < 1) {
             return null;
         }
@@ -24,13 +28,13 @@ public class RoleService {
     }
 
     public Role getRoleById(UUID id) throws Exception {
-        return repository.getById(id).orElse(null);
+        return _repository.getById(id).orElse(null);
     }
 
     public Role createRole(Role role) throws Exception {
         var roleEntity = new RoleEntity(role);
         if (roleEntity.isValid()) {
-            var createdRole = repository.save(roleEntity);
+            var createdRole = _repository.save(roleEntity);
             return createdRole.orElse(null);
         } else {
             return null;
@@ -40,7 +44,7 @@ public class RoleService {
     public Role updateRole(Role role) throws Exception {
         var roleEntity = new RoleEntity(role);
         if (roleEntity.isValid()) {
-            var updatedCompany = repository.update(roleEntity);
+            var updatedCompany = _repository.update(roleEntity);
             return updatedCompany.orElse(null);
         } else {
             return null;
@@ -48,6 +52,6 @@ public class RoleService {
     }
 
     public Role getRoleByName(String name) throws Exception {
-        return repository.getByName(name).orElse(null);
+        return _repository.getByName(name).orElse(null);
     }
 }

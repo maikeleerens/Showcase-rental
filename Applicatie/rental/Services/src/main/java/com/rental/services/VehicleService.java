@@ -12,25 +12,29 @@ import java.util.UUID;
 @Service
 public class VehicleService {
 
+    private VehicleRepositoryImpl _repository;
+
     @Autowired
-    VehicleRepositoryImpl repository;
+    public VehicleService(VehicleRepositoryImpl repository) {
+        _repository = repository;
+    }
 
     public List<? extends Vehicle> getAllVehicles() throws Exception {
-        return repository.getAll();
+        return _repository.getAll();
     }
 
     public Vehicle getVehicleById(UUID id) throws Exception {
-        return repository.getById(id).orElse(null);
+        return _repository.getById(id).orElse(null);
     }
 
     public Vehicle getByLicencePlate(String licencePlate) throws Exception {
-        return repository.getByLicencePlate(licencePlate).orElse(null);
+        return _repository.getByLicencePlate(licencePlate).orElse(null);
     }
 
     public Vehicle createVehicle(Vehicle vehicle) throws Exception {
         var vehicleEntity = new VehicleEntity(vehicle);
         if (vehicleEntity.isValid()) {
-            return repository.save(vehicleEntity).orElse(null);
+            return _repository.save(vehicleEntity).orElse(null);
         } else {
             return null;
         }
@@ -39,7 +43,7 @@ public class VehicleService {
     public Vehicle updateVehicle(Vehicle vehicle) throws Exception {
         var vehicleEntity = new VehicleEntity(vehicle);
         if (vehicleEntity.isValid()) {
-            repository.update(vehicleEntity).orElse(null);
+            _repository.update(vehicleEntity).orElse(null);
             return vehicleEntity;
         } else {
             return null;

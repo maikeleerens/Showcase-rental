@@ -1,20 +1,25 @@
-package com.rental.api.models;
+package com.rental.services.models;
 
-import com.rental.api.viewmodels.user.UserViewModel;
+import com.rental.domain.interfaces.entities.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
-public class CustomUserDetails extends UserViewModel implements UserDetails {
+public class UserDetailsEntity extends UserEntity implements UserDetails {
 
-    public CustomUserDetails(UserViewModel user) {
+    public UserDetailsEntity(User user) {
         super(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+         return getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override

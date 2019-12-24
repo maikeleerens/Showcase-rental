@@ -1,4 +1,4 @@
-package com.rental.api.service;
+package com.rental.services.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

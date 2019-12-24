@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class CompanyServiceTest {
+
     @InjectMocks
     CompanyService service;
 

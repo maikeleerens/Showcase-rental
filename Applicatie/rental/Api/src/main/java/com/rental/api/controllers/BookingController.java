@@ -7,6 +7,8 @@ import com.rental.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -15,13 +17,18 @@ import java.util.UUID;
 @RequestMapping("/api/bookings")
 public class BookingController {
 
-    @Autowired
-    BookingService service;
+    private BookingService _service;
 
+    @Autowired
+    public BookingController(BookingService service) {
+        _service = service;
+    }
+
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @GetMapping
     public ResponseEntity getAllBookings() {
         try {
-            var bookings = service.getAllBookings();
+            var bookings = _service.getAllBookings();
             if (bookings == null) return ResponseEntity.status(HttpStatus.OK).body("No bookings found");
             return ResponseEntity.status(HttpStatus.OK).body(ViewModelHelper.toBookingViewModels(bookings));
         } catch (Exception ex) {
@@ -29,24 +36,27 @@ public class BookingController {
         }
     }
 
+    @PostAuthorize("returnObject.body.user.id == authentication.principal.id OR hasRole('ROLE_ADMIN') OR hasRole('ROLE_EMPLOYEE')")
     @GetMapping("/id/{id}")
     public ResponseEntity getBookingById(@PathVariable UUID id) {
         try {
             if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id is empty");
-            var booking = service.getBookingById(id);
+            var booking = _service.getBookingById(id);
             if (booking == null) return ResponseEntity.status(HttpStatus.OK).body("No booking found with id: " + id);
+            var test = ResponseEntity.status(HttpStatus.OK).body(new BookingViewModel(booking));
             return ResponseEntity.status(HttpStatus.OK).body(new BookingViewModel(booking));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
+    @PostAuthorize("returnObject.body.user.id == authentication.principal.id OR hasRole('ROLE_ADMIN') OR hasRole('ROLE_EMPLOYEE')")
     @GetMapping("/number/{bookingNumber}")
     public ResponseEntity getBookingByNumber(@PathVariable String bookingNumber) {
         try {
             if (bookingNumber == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking number is empty");
-            var booking = service.getBookingByBookingNumber(bookingNumber);
+            var booking = _service.getBookingByBookingNumber(bookingNumber);
             if (booking == null) return ResponseEntity.status(HttpStatus.OK).body("No booking found with booking number: " + bookingNumber);
             return ResponseEntity.status(HttpStatus.OK).body(new BookingViewModel(booking));
         } catch (Exception ex) {
@@ -57,7 +67,7 @@ public class BookingController {
     @PostMapping("/create")
     public ResponseEntity createBooking(@RequestBody CreateBookingViewModel createBookingViewModel) {
         try {
-            var createdBooking = service.createBooking(ViewModelHelper.toBookingViewModel(createBookingViewModel));
+            var createdBooking = _service.createBooking(ViewModelHelper.toBookingViewModel(createBookingViewModel));
             if (createdBooking == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create booking");
             return ResponseEntity.status(HttpStatus.OK).body(new BookingViewModel(createdBooking));
@@ -82,7 +92,7 @@ public class BookingController {
     @GetMapping("/unreturned")
     public ResponseEntity getAllUnReturnedBookings() {
         try {
-            var bookings = service.getAllUnReturnedBookings();
+            var bookings = _service.getAllUnReturnedBookings();
             if (bookings == null)
                 return ResponseEntity.status(HttpStatus.OK).body("No un returned bookings found!");
             return ResponseEntity.status(HttpStatus.OK).body(ViewModelHelper.toBookingViewModels(bookings));
@@ -97,12 +107,12 @@ public class BookingController {
         try {
             if (bookingNumber == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking number is empty");
-            var bookingToReturn = service.getBookingByBookingNumber(bookingNumber);
+            var bookingToReturn = _service.getBookingByBookingNumber(bookingNumber);
             if (bookingToReturn == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking " + bookingNumber + " does not exist");
             var bookingViewModel = new BookingViewModel(bookingToReturn);
             bookingViewModel.setReturned(true);
-            var updatedBooking = service.updateBooking(bookingViewModel);
+            var updatedBooking = _service.updateBooking(bookingViewModel);
             if (updatedBooking == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to return booking");
             return ResponseEntity.status(HttpStatus.OK).body(new BookingViewModel(updatedBooking));
@@ -114,7 +124,7 @@ public class BookingController {
     @GetMapping("/notify")
     public ResponseEntity notifyBookingObservers() {
         try {
-            var bookingsToNotify = service.notifyAllExpiredAndUnreturnedBookings();
+            var bookingsToNotify = _service.notifyAllExpiredAndUnreturnedBookings();
             if (!bookingsToNotify)
                 return ResponseEntity.status(HttpStatus.OK).body("No notifications send");
             return ResponseEntity.status(HttpStatus.OK).body("Notifications send!");
