@@ -3,11 +3,13 @@ package com.rental.services;
 import com.rental.domain.interfaces.entities.Company;
 import com.rental.infrastructure.repositories.CompanyRepositoryImpl;
 import com.rental.services.models.CompanyEntity;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -69,5 +71,19 @@ public class CompanyServiceTest {
 
         //arrange
         assertThat(actualCompany).isNull();
+    }
+
+    @Test
+    public void createCompany_Returns_Created_Company() throws Exception {
+        //arrange
+        Company companyToCreate = new CompanyEntity("TestNaam", "TestStraat");
+
+        Mockito.when(repository.save(companyToCreate)).thenReturn(Optional.of(companyToCreate));
+
+        //act
+        Company createdCompany = service.createCompany(companyToCreate);
+
+        //arrange
+        assertThat(createdCompany).isEqualTo(companyToCreate);
     }
 }

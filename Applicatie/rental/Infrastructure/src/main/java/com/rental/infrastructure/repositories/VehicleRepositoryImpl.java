@@ -19,8 +19,10 @@ import java.util.UUID;
 @Transactional
 public class VehicleRepositoryImpl implements VehicleRepository {
 
+    //region Private attributes
     @PersistenceContext
     private EntityManager em;
+    //endregion
 
     @Override
     public List<? extends Vehicle> getAll() {
@@ -47,10 +49,14 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
     @Override
     public Optional<Vehicle> save(Vehicle vehicle) {
-        var vehicleDataModel = new VehicleDataModel(vehicle);
-        em.persist(vehicleDataModel);
-        em.flush();
-        return Optional.of(vehicleDataModel);
+        try {
+            var vehicleDataModel = new VehicleDataModel(vehicle);
+            em.persist(vehicleDataModel);
+            em.flush();
+            return Optional.of(vehicleDataModel);
+        } catch (Exception ex) {
+            return Optional.empty();
+        }
     }
 
     @Override

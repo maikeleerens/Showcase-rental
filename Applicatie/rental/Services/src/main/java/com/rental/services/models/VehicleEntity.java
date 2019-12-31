@@ -39,7 +39,6 @@ public class VehicleEntity extends BaseEntity implements Vehicle {
     //endregion
 
     //region Getters and setters
-
     @Override
     public String getLicencePlate() {
         return licencePlate;

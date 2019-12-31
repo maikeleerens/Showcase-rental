@@ -18,15 +18,9 @@ public class CreateVehicleViewModel{
 
     @JsonProperty("mileage")
     private int mileage;
-
-    //endregion
-
-    //region Constructors
-
     //endregion
 
     //region Getters setters
-
     public String getLicencePlate() {
         return licencePlate;
     }
@@ -58,6 +52,5 @@ public class CreateVehicleViewModel{
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-
     //endregion
 }

@@ -12,7 +12,9 @@ import java.util.UUID;
 @Service
 public class RoleService {
 
+    //region Private attributes
     private RoleRepositoryImpl _repository;
+    //endregion
 
     @Autowired
     public RoleService(RoleRepositoryImpl repository) {

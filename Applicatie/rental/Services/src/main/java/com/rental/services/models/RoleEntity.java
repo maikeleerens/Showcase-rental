@@ -4,10 +4,9 @@ import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Role;
 
 public class RoleEntity extends BaseEntity implements Role {
+
     //region Private attributes
-
     private String name;
-
     //endregion
 
     //region Constructors

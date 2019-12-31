@@ -14,7 +14,9 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    //region Private attributes
     private String secretKey = "secret";
+    //endregion
 
     public String extractUserName(String token) {
         return extractClaimFromToken(token, Claims::getSubject);

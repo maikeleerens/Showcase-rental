@@ -22,7 +22,6 @@ public class UpdateUserViewModel {
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("email")
     public String getEmail() {
         return email;
@@ -72,6 +71,5 @@ public class UpdateUserViewModel {
     public void setCity(String city) {
         this.city = city;
     }
-
     //endregion
 }

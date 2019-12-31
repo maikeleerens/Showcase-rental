@@ -19,15 +19,15 @@ import java.util.UUID;
 @Service
 public class UserService {
 
+    //region Private attributes
     private UserRepositoryImpl _repository;
     private RoleService _roleService;
-    //private PasswordEncoder _passwordEncoder;
+    //endregion
 
     @Autowired
     public UserService(UserRepositoryImpl repository, RoleService roleService) {
         _repository = repository;
         _roleService = roleService;
-        //_passwordEncoder = passwordEncoder;
     }
 
     public List<? extends User> getAllUsers() throws Exception {
@@ -65,7 +65,6 @@ public class UserService {
                 roles.add(new RoleEntity(roleEntity));
         }
         userEntity.setRoles(roles);
-        //userEntity.setPassword(_passwordEncoder.encode(userEntity.getPassword()));
         if (userEntity.isValid()) {
             var createdUser = _repository.save(userEntity);
             return createdUser.orElse(null);

@@ -12,7 +12,9 @@ import java.util.UUID;
 @Service
 public class VehicleService {
 
+    //region Private attributes
     private VehicleRepositoryImpl _repository;
+    //endregion
 
     @Autowired
     public VehicleService(VehicleRepositoryImpl repository) {

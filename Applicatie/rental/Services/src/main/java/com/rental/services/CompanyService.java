@@ -17,7 +17,9 @@ import java.util.UUID;
 @Service
 public class CompanyService {
 
+    //region Private attributes
     private CompanyRepositoryImpl _repository;
+    //endregion
 
     @Autowired
     public CompanyService(CompanyRepositoryImpl repository) {

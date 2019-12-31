@@ -38,7 +38,6 @@ public class CreateBookingViewModel {
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("booking_number")
     public String getBookingNumber() {
         return bookingNumber;
@@ -102,6 +101,5 @@ public class CreateBookingViewModel {
     public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
-
     //endregion
 }

@@ -16,8 +16,10 @@ import java.util.*;
 @Transactional
 public class BookingRepositoryImpl implements BookingRepository {
 
+    //region Private attributes
     @PersistenceContext
     private EntityManager em;
+    //endregion
 
     @Override
     public List<? extends Booking> getAll() {

@@ -22,10 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class VehicleServiceTest {
 
     @InjectMocks
-    private VehicleService service;
+    private VehicleService _service;
 
     @Mock
-    private VehicleRepositoryImpl repository;
+    private VehicleRepositoryImpl _repository;
 
     //region Tests
     @Test
@@ -34,10 +34,10 @@ public class VehicleServiceTest {
         Vehicle vehicle = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
         List<? extends Vehicle> expectedVehicles = Arrays.asList(vehicle);
 
-        Mockito.doReturn(expectedVehicles).when(repository).getAll();
+        Mockito.doReturn(expectedVehicles).when(_repository).getAll();
 
         //Act
-        List<? extends Vehicle> actualVehicleList = service.getAllVehicles();
+        List<? extends Vehicle> actualVehicleList = _service.getAllVehicles();
 
         //Assert
         assertThat(actualVehicleList).isEqualTo(expectedVehicles);
@@ -49,10 +49,10 @@ public class VehicleServiceTest {
         Vehicle expectedVehicle = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
         expectedVehicle.setId(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"));
 
-        Mockito.when(repository.getById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"))).thenReturn(Optional.of(expectedVehicle));
+        Mockito.when(_repository.getById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"))).thenReturn(Optional.of(expectedVehicle));
 
         //act
-        Vehicle actualVehicle = service.getVehicleById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"));
+        Vehicle actualVehicle = _service.getVehicleById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"));
 
         //assert
         assertThat(actualVehicle).isEqualTo(expectedVehicle);
@@ -64,10 +64,10 @@ public class VehicleServiceTest {
         Vehicle vehicle = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
         vehicle.setId(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"));
 
-        Mockito.when(repository.getById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"))).thenReturn(Optional.of(vehicle));
+        Mockito.when(_repository.getById(UUID.fromString("1fda32e4-2d2d-4113-938c-07f753d21fb7"))).thenReturn(Optional.of(vehicle));
 
         //act
-        Vehicle actualVehicle = service.getVehicleById(UUID.fromString("4333d86e-8834-46ea-bcf5-5035a900ed8f"));
+        Vehicle actualVehicle = _service.getVehicleById(UUID.fromString("4333d86e-8834-46ea-bcf5-5035a900ed8f"));
 
         //assert
         assertThat(actualVehicle).isNull();
@@ -78,10 +78,10 @@ public class VehicleServiceTest {
         //arrange
         Vehicle expectedVehicle = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
 
-        Mockito.when(repository.getByLicencePlate("TestPlate")).thenReturn(Optional.of(expectedVehicle));
+        Mockito.when(_repository.getByLicencePlate("TestPlate")).thenReturn(Optional.of(expectedVehicle));
 
         //act
-        Vehicle actualVehicle = service.getByLicencePlate("TestPlate");
+        Vehicle actualVehicle = _service.getByLicencePlate("TestPlate");
 
         //assert
         assertThat(actualVehicle).isEqualTo(expectedVehicle);
@@ -92,24 +92,24 @@ public class VehicleServiceTest {
         //arrange
         Vehicle vehicle = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
 
-        Mockito.when(repository.getByLicencePlate("TestPlate")).thenReturn(Optional.of(vehicle));
+        Mockito.when(_repository.getByLicencePlate("TestPlate")).thenReturn(Optional.of(vehicle));
 
         //act
-        Vehicle actualVehicle = service.getByLicencePlate("Fake-Licence-Plate");
+        Vehicle actualVehicle = _service.getByLicencePlate("Fake-Licence-Plate");
 
         //assert
         assertThat(actualVehicle).isNull();
     }
 
     @Test
-    public void createVehicle_Returns_Vehicle() throws Exception {
+    public void createVehicle_Returns_Created_Vehicle() throws Exception {
         //arrange
         Vehicle vehicleToCreate = new VehicleEntity("TestPlate", "TestName", new BigDecimal("10"), 10);
 
-        Mockito.when(repository.save(vehicleToCreate)).thenReturn(Optional.of(vehicleToCreate));
+        Mockito.when(_repository.save(vehicleToCreate)).thenReturn(Optional.of(vehicleToCreate));
 
         //act
-        Vehicle actualCreatedVehicle = service.createVehicle(vehicleToCreate);
+        Vehicle actualCreatedVehicle = _service.createVehicle(vehicleToCreate);
 
         //assert
         assertThat(actualCreatedVehicle).isNotNull();
@@ -120,10 +120,10 @@ public class VehicleServiceTest {
         //arrange
         Vehicle vehicleToCreate = new VehicleEntity("", "", new BigDecimal("10"), 10);
 
-        Mockito.when(repository.save(vehicleToCreate)).thenReturn(Optional.of(vehicleToCreate));
+        Mockito.when(_repository.save(vehicleToCreate)).thenReturn(Optional.of(vehicleToCreate));
 
         //act
-        Vehicle actualVehicle = service.createVehicle(vehicleToCreate);
+        Vehicle actualVehicle = _service.createVehicle(vehicleToCreate);
 
         //assert
         assertThat(actualVehicle).isNull();

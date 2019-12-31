@@ -8,6 +8,7 @@ import com.rental.domain.interfaces.entities.User;
 import java.util.List;
 
 public class UserEntity extends BaseEntity implements User, Observer {
+
     //region Private attributes
     private String email;
 
@@ -50,7 +51,6 @@ public class UserEntity extends BaseEntity implements User, Observer {
     //endregion
 
     //region Getters and setters
-
     @Override
     public String getEmail() {
         return email;

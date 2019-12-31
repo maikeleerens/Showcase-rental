@@ -41,7 +41,6 @@ public class CompanyViewModel extends BaseEntity implements Company {
     //endregion
 
     //region Getters and setters
-
     @Override
     @JsonProperty("company_id")
     public UUID getId() {
@@ -89,7 +88,6 @@ public class CompanyViewModel extends BaseEntity implements Company {
     public void addNotification(String notification) {
         notifications.add(notification);
     }
-
     //endregion
 
     //region Public methods

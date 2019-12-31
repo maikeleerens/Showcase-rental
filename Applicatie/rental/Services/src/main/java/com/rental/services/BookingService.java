@@ -17,10 +17,12 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BookingService {
 
+    //region Private attributes
     private BookingRepositoryImpl _repository;
     private CompanyService _companyService;
     private UserService _userService;
     private VehicleService _vehicleService;
+    //endregion
 
     @Autowired
     public BookingService(BookingRepositoryImpl repository, CompanyService companyService, UserService userService, VehicleService vehicleService) {

@@ -9,7 +9,6 @@ import java.util.UUID;
 public class UpdateVehicleViewModel implements Vehicle {
 
     //region Private attributes
-
     @JsonProperty("vehicle_id")
     private UUID Id;
 
@@ -24,16 +23,9 @@ public class UpdateVehicleViewModel implements Vehicle {
 
     @JsonProperty("mileage")
     private int mileage;
-
-    //endregion
-
-    //region Constructors
-
     //endregion
 
     //region Getters setters
-
-
     @Override
     @JsonProperty("vehicle_id")
     public UUID getId() {
@@ -93,6 +85,5 @@ public class UpdateVehicleViewModel implements Vehicle {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-
     //endregion
 }

@@ -12,10 +12,8 @@ import javax.persistence.Table;
 public class RoleDataModel extends BaseEntity implements Role {
 
     //region Private attributes
-
     @Column(name = "name", nullable = false)
     private String name;
-
     //endregion
 
     //region Constructors
@@ -42,6 +40,5 @@ public class RoleDataModel extends BaseEntity implements Role {
     public void setName(String name) {
         this.name = name;
     }
-
-
+    //endregion
 }

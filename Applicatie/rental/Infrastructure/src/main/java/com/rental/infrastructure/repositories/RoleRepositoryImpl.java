@@ -19,8 +19,10 @@ import java.util.UUID;
 @Transactional
 public class RoleRepositoryImpl implements RoleRepository {
 
+    //region Private attributes
     @PersistenceContext
     private EntityManager em;
+    //endregion
 
     @Override
     public List<? extends Role> getAll() {

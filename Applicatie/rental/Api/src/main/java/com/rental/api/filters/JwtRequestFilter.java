@@ -18,8 +18,10 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
+    //region Private attributes
     private JwtService _jwtService;
     private DefaultUserDetailsService _userDetailsService;
+    //endregion
 
     @Autowired
     public JwtRequestFilter(JwtService jwtService, DefaultUserDetailsService userDetailsService) {

@@ -18,8 +18,10 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
+    //region Private attributes
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
+    //endregion
 
     @Bean
     public Docket api() {

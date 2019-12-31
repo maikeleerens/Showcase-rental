@@ -19,7 +19,6 @@ public class CreateCompanyViewModel{
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("name")
     public String getName() {
         return name;
@@ -39,6 +38,5 @@ public class CreateCompanyViewModel{
     public void setAddress(String address) {
         this.address = address;
     }
-
     //endregion
 }

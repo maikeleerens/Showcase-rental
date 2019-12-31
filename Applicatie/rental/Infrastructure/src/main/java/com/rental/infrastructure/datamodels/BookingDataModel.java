@@ -75,7 +75,6 @@ public class BookingDataModel extends BaseEntity implements Booking {
     //endregion
 
     //region Getters and setters
-
     @Override
     public String getBookingNumber() {
         return bookingNumber;
@@ -153,6 +152,5 @@ public class BookingDataModel extends BaseEntity implements Booking {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
-
     //endregion
 }

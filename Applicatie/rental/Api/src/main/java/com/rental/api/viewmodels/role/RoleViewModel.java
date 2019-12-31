@@ -16,12 +16,6 @@ public class RoleViewModel extends BaseEntity implements Role {
     //endregion
 
     //region Constructors
-
-
-    public RoleViewModel(UUID id) {
-        setId(id);
-    }
-
     public RoleViewModel(Role role) {
         setId(role.getId());
         name = role.getName();
@@ -30,12 +24,9 @@ public class RoleViewModel extends BaseEntity implements Role {
     public RoleViewModel(String name) {
         this.name = name;
     }
-
     //endregion
 
     //region Getters and setters
-
-
     @Override
     @JsonProperty("role_id")
     public UUID getId() {
@@ -59,7 +50,6 @@ public class RoleViewModel extends BaseEntity implements Role {
     public void setName(String name) {
         this.name = name;
     }
-
     //endregion
 
     //region Public methods

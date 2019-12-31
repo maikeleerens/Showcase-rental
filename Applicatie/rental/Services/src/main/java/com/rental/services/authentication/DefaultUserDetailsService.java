@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultUserDetailsService implements UserDetailsService {
 
+    //region Private attributes
     private UserService _service;
+    //endregion
 
     @Autowired
     public DefaultUserDetailsService(UserService service) {

@@ -10,10 +10,13 @@ import java.util.stream.Collectors;
 
 public class UserDetailsEntity extends UserEntity implements UserDetails {
 
+    //region Constructors
     public UserDetailsEntity(User user) {
         super(user);
     }
+    //endregion
 
+    //region Public methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
          return getRoles()
@@ -51,4 +54,5 @@ public class UserDetailsEntity extends UserEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    //endregion
 }

@@ -24,7 +24,6 @@ public class UpdateCompanyViewModel implements Company {
     //endregion
 
     //region Getters and setters
-
     @Override
     @JsonProperty("company_id")
     public UUID getId() {
@@ -72,6 +71,5 @@ public class UpdateCompanyViewModel implements Company {
     public void addNotification(String notification) {
         notifications.add(notification);
     }
-
     //endregion
 }

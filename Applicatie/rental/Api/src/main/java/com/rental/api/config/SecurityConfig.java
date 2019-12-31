@@ -21,8 +21,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //region Private Attributes
     private DefaultUserDetailsService _userDetailsService;
     private JwtRequestFilter _jwtRequestFilter;
+    //endregion
 
     @Autowired
     public SecurityConfig(DefaultUserDetailsService userDetailsService, JwtRequestFilter jwtRequestFilter) {

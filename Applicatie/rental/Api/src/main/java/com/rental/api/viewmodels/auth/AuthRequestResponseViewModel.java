@@ -10,19 +10,15 @@ public class AuthRequestResponseViewModel {
     //endregion
 
     //region Constructors
-
     public AuthRequestResponseViewModel(String bearerToken) {
         this.bearerToken = bearerToken;
     }
-
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("token")
     public String getBearerToken() {
         return bearerToken;
     }
-
-    //region
+    //endregion
 }

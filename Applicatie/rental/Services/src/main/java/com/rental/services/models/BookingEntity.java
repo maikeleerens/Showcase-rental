@@ -60,7 +60,6 @@ public class BookingEntity extends BaseEntity implements Booking, Subject {
     //endregion
 
     //region Getters and setters
-
     public static BigDecimal getExtraCostPerDay() {
         return extraCostPerDay;
     }
@@ -156,7 +155,6 @@ public class BookingEntity extends BaseEntity implements Booking, Subject {
     public void setObservers(List<Observer> observers) {
         this.observers = observers;
     }
-
     //endregion
 
     //region Public methods

@@ -23,7 +23,6 @@ public class VehicleViewModel extends BaseEntity implements Vehicle {
 
     @JsonProperty("mileage")
     private int mileage;
-
     //endregion
 
     //region Constructors
@@ -107,7 +106,6 @@ public class VehicleViewModel extends BaseEntity implements Vehicle {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
-
     //endregion
 
     //region Public methods
@@ -125,5 +123,4 @@ public class VehicleViewModel extends BaseEntity implements Vehicle {
         return new VehicleViewModel(model.getLicencePlate(), model.getVehicleName(), model.getPricePerDay(), model.getMileage());
     }
     //endregion
-
 }

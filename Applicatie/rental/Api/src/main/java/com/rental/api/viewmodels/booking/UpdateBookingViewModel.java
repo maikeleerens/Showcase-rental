@@ -29,7 +29,6 @@ public class UpdateBookingViewModel {
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("booking_id")
     public UUID getId() {
         return id;
@@ -61,6 +60,5 @@ public class UpdateBookingViewModel {
     public void setVehicleIds(List<String> vehicleIds) {
         this.vehicleIds = vehicleIds;
     }
-
     //endregion
 }

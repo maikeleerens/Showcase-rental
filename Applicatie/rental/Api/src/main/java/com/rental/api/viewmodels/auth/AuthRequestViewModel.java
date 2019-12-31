@@ -24,7 +24,6 @@ public class AuthRequestViewModel {
     //endregion
 
     //region Getters and setters
-
     @JsonProperty("email")
     public String getUsername() {
         return username;
@@ -44,6 +43,5 @@ public class AuthRequestViewModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
     //endregion
 }

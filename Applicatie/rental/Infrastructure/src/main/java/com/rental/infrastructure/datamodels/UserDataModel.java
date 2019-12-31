@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "Users")
 public class UserDataModel extends BaseEntity implements User {
-    //region Private attributes
 
+    //region Private attributes
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

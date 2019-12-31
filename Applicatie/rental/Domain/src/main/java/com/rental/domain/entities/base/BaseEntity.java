@@ -18,7 +18,6 @@ public class BaseEntity {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", unique = true, nullable = false)
-    @JsonInclude(Include.NON_NULL)
     private UUID id;
     //endregion
 

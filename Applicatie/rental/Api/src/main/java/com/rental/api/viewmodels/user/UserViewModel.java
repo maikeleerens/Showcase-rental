@@ -157,7 +157,6 @@ public class UserViewModel extends BaseEntity implements User {
     public void addNotification(String notification) {
         notifications.add(notification);
     }
-
     //endregion
 
     //region Public methods
@@ -174,12 +173,7 @@ public class UserViewModel extends BaseEntity implements User {
 
     public static UserViewModel toUserViewModel(CreateUserViewModel model) {
         List<RoleViewModel> roleList = new ArrayList<>();
-
-        for (var roleId:
-                model.getRoleIds()) {
-            roleList.add(new RoleViewModel(roleId));
-        }
-
+        roleList.add(new RoleViewModel("CUSTOMER"));
         return new UserViewModel(model.getEmail(), model.getPassword(), roleList, model.getName(), model.getAddress(), model.getCity());
     }
 

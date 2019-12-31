@@ -16,8 +16,10 @@ import java.util.UUID;
 @Transactional
 public class CompanyRepositoryImpl implements CompanyRepository {
 
+    //region Private attributes
     @PersistenceContext
     private EntityManager em;
+    //endregion
 
     @Override
     public List<? extends Company> getAll() {
