@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Company;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -89,5 +90,21 @@ public class CompanyViewModel extends BaseEntity implements Company {
         notifications.add(notification);
     }
 
+    //endregion
+
+    //region Public methods
+    public static List<CompanyViewModel> toCompanyViewModels(List<? extends Company> companies) {
+        List<CompanyViewModel> returnCompanyList = new ArrayList<>();
+
+        for (var company:
+                companies) {
+            returnCompanyList.add(new CompanyViewModel(company));
+        }
+        return returnCompanyList;
+    }
+
+    public static CompanyViewModel toCompanyViewModel(CreateCompanyViewModel model) {
+        return new CompanyViewModel(model.getName(), model.getAddress());
+    }
     //endregion
 }

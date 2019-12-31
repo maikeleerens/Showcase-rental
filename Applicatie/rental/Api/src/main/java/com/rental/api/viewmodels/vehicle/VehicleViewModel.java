@@ -5,6 +5,8 @@ import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Vehicle;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class VehicleViewModel extends BaseEntity implements Vehicle {
@@ -46,7 +48,6 @@ public class VehicleViewModel extends BaseEntity implements Vehicle {
     //endregion
 
     //region Getters setters
-
     @Override
     @JsonProperty("vehicle_id")
     public UUID getId() {
@@ -107,6 +108,22 @@ public class VehicleViewModel extends BaseEntity implements Vehicle {
         this.mileage = mileage;
     }
 
+    //endregion
+
+    //region Public methods
+    public static List<VehicleViewModel> toVehicleViewModels(List<? extends Vehicle> vehicles) {
+        List<VehicleViewModel> returnVehicleList = new ArrayList<>();
+
+        for (var vehicle:
+                vehicles) {
+            returnVehicleList.add(new VehicleViewModel(vehicle));
+        }
+        return returnVehicleList;
+    }
+
+    public static VehicleViewModel toVehicleViewModel(CreateVehicleViewModel model) {
+        return new VehicleViewModel(model.getLicencePlate(), model.getVehicleName(), model.getPricePerDay(), model.getMileage());
+    }
     //endregion
 
 }

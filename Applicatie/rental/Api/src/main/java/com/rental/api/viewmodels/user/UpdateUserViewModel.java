@@ -1,11 +1,6 @@
 package com.rental.api.viewmodels.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.rental.domain.interfaces.entities.User;
-
-import java.util.List;
-import java.util.UUID;
 
 public class UpdateUserViewModel {
 

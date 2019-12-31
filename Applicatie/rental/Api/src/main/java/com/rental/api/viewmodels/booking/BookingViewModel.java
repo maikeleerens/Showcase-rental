@@ -3,7 +3,6 @@ package com.rental.api.viewmodels.booking;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rental.api.viewmodels.company.CompanyViewModel;
-import com.rental.api.viewmodels.helpers.ViewModelHelper;
 import com.rental.api.viewmodels.user.UserViewModel;
 import com.rental.api.viewmodels.vehicle.VehicleViewModel;
 import com.rental.domain.entities.base.BaseEntity;
@@ -49,8 +48,6 @@ public class BookingViewModel extends BaseEntity implements Booking {
     //endregion
 
     //region Constructors
-
-
     public BookingViewModel(String bookingNumber, Date startDate, Date endDate, List<VehicleViewModel> vehicles, UserViewModel user, CompanyViewModel company) {
         this.bookingNumber = bookingNumber;
         this.startDate = startDate;
@@ -71,7 +68,7 @@ public class BookingViewModel extends BaseEntity implements Booking {
         bookingNumber = booking.getBookingNumber();
         startDate = booking.getStartDate();
         endDate = booking.getEndDate();
-        vehicles = ViewModelHelper.toVehicleViewModels(booking.getVehicles());
+        vehicles = VehicleViewModel.toVehicleViewModels(booking.getVehicles());
         user = new UserViewModel(booking.getUser());
         company = new CompanyViewModel(booking.getCompany());
         isReturned = booking.isReturned();
@@ -141,7 +138,7 @@ public class BookingViewModel extends BaseEntity implements Booking {
     @Override
     @JsonProperty("vehicles")
     public void setVehicles(List<? extends Vehicle> vehicles) {
-        this.vehicles = ViewModelHelper.toVehicleViewModels(vehicles);
+        this.vehicles = VehicleViewModel.toVehicleViewModels(vehicles);
     }
 
     @Override
@@ -190,6 +187,29 @@ public class BookingViewModel extends BaseEntity implements Booking {
     @JsonProperty("total_price")
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+    //endregion
+
+    //region Public methods
+    public static List<BookingViewModel> toBookingViewModels(List<? extends Booking> bookings) {
+        List<BookingViewModel> returnBookingList = new ArrayList<>();
+
+        for (var booking:
+                bookings) {
+            returnBookingList.add(new BookingViewModel(booking));
+        }
+        return returnBookingList;
+    }
+
+    public static BookingViewModel toBookingViewModel(CreateBookingViewModel model) {
+        List<VehicleViewModel> vehicleList = new ArrayList<>();
+        for (var vehicle:
+                model.getVehicleIds()) {
+            vehicleList.add(new VehicleViewModel(UUID.fromString(vehicle)));
+        }
+        return new BookingViewModel(model.getBookingNumber(), model.getStartDate(),
+                model.getEndDate(), vehicleList, new UserViewModel(UUID.fromString(model.getUserId())),
+                new CompanyViewModel(UUID.fromString(model.getCompanyId())));
     }
     //endregion
 }

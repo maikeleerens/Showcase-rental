@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rental.domain.entities.base.BaseEntity;
 import com.rental.domain.interfaces.entities.Role;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RoleViewModel extends BaseEntity implements Role {
 
     //region Private attributes
-
     @JsonProperty("name")
     private String name;
     //endregion
@@ -59,6 +60,18 @@ public class RoleViewModel extends BaseEntity implements Role {
         this.name = name;
     }
 
+    //endregion
+
+    //region Public methods
+    public static List<RoleViewModel> toRoleViewModels(List<? extends Role> roles) {
+        List<RoleViewModel> returnRoleList = new ArrayList<>();
+
+        for (var role:
+                roles) {
+            returnRoleList.add(new RoleViewModel(role));
+        }
+        return returnRoleList;
+    }
     //endregion
 
 }

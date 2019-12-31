@@ -1,6 +1,5 @@
 package com.rental.services;
 
-import com.rental.domain.interfaces.entities.Role;
 import com.rental.domain.interfaces.entities.User;
 import com.rental.infrastructure.repositories.UserRepositoryImpl;
 import com.rental.services.models.RoleEntity;

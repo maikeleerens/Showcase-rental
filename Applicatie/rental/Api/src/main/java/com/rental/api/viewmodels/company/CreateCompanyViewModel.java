@@ -1,11 +1,6 @@
 package com.rental.api.viewmodels.company;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.rental.domain.interfaces.entities.Company;
-
-import java.util.List;
-import java.util.UUID;
 
 public class CreateCompanyViewModel{
 

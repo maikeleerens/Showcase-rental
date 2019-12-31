@@ -266,6 +266,8 @@
       <workItem from="1576945675224" duration="9787000" />
       <workItem from="1577117693703" duration="135000" />
       <workItem from="1577175160333" duration="17551000" />
+      <workItem from="1577697880113" duration="16330000" />
+      <workItem from="1577783982646" duration="643000" />
     </task>
     <servers />
   </component>
@@ -300,7 +302,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Infrastructure/src/main/java/com/rental/infrastructure/repositories/BookingRepositoryImpl.java</url>
-          <line>52</line>
+          <line>55</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

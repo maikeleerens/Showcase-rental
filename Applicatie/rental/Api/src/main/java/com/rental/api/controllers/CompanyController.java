@@ -3,9 +3,11 @@ package com.rental.api.controllers;
 import com.rental.api.viewmodels.company.CompanyViewModel;
 import com.rental.api.viewmodels.company.CreateCompanyViewModel;
 import com.rental.api.viewmodels.company.UpdateCompanyViewModel;
-import com.rental.api.viewmodels.helpers.ViewModelHelper;
-import com.rental.domain.interfaces.entities.Company;
 import com.rental.services.CompanyService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +18,39 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/companies")
+@Api(tags = {"Company management"})
+@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Successfully executed request"),
+        @ApiResponse(code = 400, message = "Failed to execute request"),
+        @ApiResponse(code = 401, message = "Unauthorized: Invalid username or password"),
+        @ApiResponse(code = 403, message = "Unauthorized: No access to resource"),
+        @ApiResponse(code = 404, message = "Resource not found")
+})
 public class CompanyController {
 
+    //region Private attributes
     private CompanyService _service;
+    //endregion
 
     @Autowired
     public CompanyController(CompanyService service) {
         _service = service;
     }
 
+    @ApiOperation(value = "Gets all companies", response = CompanyViewModel.class, responseContainer = "List")
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @GetMapping
     public ResponseEntity getAllCompanies() {
         try {
             var companies = _service.getAllCompanies();
             if (companies == null) return ResponseEntity.status(HttpStatus.OK).body("No companies found");
-            return ResponseEntity.status(HttpStatus.OK).body(ViewModelHelper.toCompanyViewModels(companies));
+            return ResponseEntity.status(HttpStatus.OK).body(CompanyViewModel.toCompanyViewModels(companies));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 
+    @ApiOperation(value = "Gets a company by id", response = CompanyViewModel.class)
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @GetMapping("/id/{id}")
     public ResponseEntity getCompanyById(@PathVariable("id") UUID id) {
@@ -50,12 +64,13 @@ public class CompanyController {
         }
     }
 
+    @ApiOperation(value = "Creates a new company", response = CompanyViewModel.class)
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @PostMapping("/create")
     public ResponseEntity createCompany(@RequestBody CreateCompanyViewModel company) {
         try {
             //if (!company.isValid()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Company is not valid");
-            var createdCompany = _service.createCompany(ViewModelHelper.toCompanyViewModel(company));
+            var createdCompany = _service.createCompany(CompanyViewModel.toCompanyViewModel(company));
             if (createdCompany == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create company");
             return ResponseEntity.status(HttpStatus.OK).body(new CompanyViewModel(createdCompany));
         } catch (Exception ex) {
@@ -63,6 +78,7 @@ public class CompanyController {
         }
     }
 
+    @ApiOperation(value = "Updates an existing company", response = CompanyViewModel.class)
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @PutMapping("/edit")
     public ResponseEntity editCompany(@RequestBody UpdateCompanyViewModel company) {
@@ -77,6 +93,7 @@ public class CompanyController {
         }
     }
 
+    @ApiOperation(value = "Gets all notifications for a company by id", response = String.class, responseContainer = "List")
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @GetMapping("/notifications/{id}")
     public ResponseEntity getCompanyNotifications(@PathVariable UUID id) {
@@ -90,6 +107,7 @@ public class CompanyController {
         }
     }
 
+    @ApiOperation(value = "Gets all notifications as txt file for a company by id", response = String.class)
     @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @PostMapping("/notifications/export/{id}")
     public ResponseEntity exportNotificationsToFile(@PathVariable UUID id, @RequestBody String filePath) {

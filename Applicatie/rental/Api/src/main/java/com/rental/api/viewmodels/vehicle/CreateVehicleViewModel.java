@@ -1,11 +1,8 @@
 package com.rental.api.viewmodels.vehicle;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.rental.domain.interfaces.entities.Vehicle;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class CreateVehicleViewModel{
 

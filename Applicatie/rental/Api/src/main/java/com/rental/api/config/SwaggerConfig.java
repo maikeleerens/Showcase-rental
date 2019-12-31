@@ -3,20 +3,15 @@ package com.rental.api.config;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.awt.print.Pageable;
-import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -34,7 +29,13 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.rental.api.controllers"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiInfo())
+                .tags(new Tag("Auth management", "Manages the authentication and authorization."),
+                        new Tag("Booking management", "Manages the bookings"),
+                        new Tag("Company management", "Manages the companies"),
+                        new Tag("User management", "Manages the users"),
+                        new Tag("Vehicle management", "Manages the vehicles"));
     }
 
     private ApiKey apiKey() {
@@ -48,12 +49,16 @@ public class SwaggerConfig {
                 .build();
     }
 
-    List<SecurityReference> defaultAuth() {
+    private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope
                 = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return Lists.newArrayList(
                 new SecurityReference("JWT", authorizationScopes));
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("Car rental REST API").version("1.0.0").build();
     }
 }
